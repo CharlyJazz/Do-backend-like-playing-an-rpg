@@ -1,4 +1,4 @@
-# Do backend, like play a rpg game
+# Do backend, like playing an rpg game
 
 ## Que es esto?
 
