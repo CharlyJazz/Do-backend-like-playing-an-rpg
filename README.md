@@ -20,8 +20,6 @@ Esta API esta pensada para ser consumida por las aplicaciones mobiles y la aplic
 
 A continuacion se detallan todas las reglas de negocio de la API:
 
----
-
 ### Creacion de Usuario, Registro y Actualizacion de Contrasena:
 
 (Illustracion)
