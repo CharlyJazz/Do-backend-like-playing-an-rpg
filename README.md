@@ -109,3 +109,8 @@ articulos mas nuevos de las personas que el sigue o relacionados con topics que 
 - Descomposicion de software
 - Sistemas Informaticos Distribuidos
 - Comprension de como evoluciona la Web y los estandares
+
+## Diagrama de relacion de entendidad (ERD)
+
+
+![medium-clone](https://user-images.githubusercontent.com/55514234/94639437-c7cca580-02a1-11eb-8630-cca4ec2ac92f.png)
