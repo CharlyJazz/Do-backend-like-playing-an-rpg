@@ -12,5 +12,8 @@ Como la palabra lo dice, un Servicio sirve algo a el cliente, nosotros.
 
 ## Creacion de la Base de Datos
 
+Necesitamos tener un archivo para crear la base de datos antes de empezar a trabajar con ella.
+
 ## Creacion de Servicios de Usuario y Articulos
 
+Crearemos los respectivos `endpoints` para el registro del usuario, y crear articulos
