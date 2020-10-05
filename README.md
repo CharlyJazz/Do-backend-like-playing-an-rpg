@@ -1,116 +1,115 @@
 # Do backend, like playing an rpg game
 
-(Illustracion)
+(Ilustración)
 
-## Que es esto?
+## ¿Qué es esto?
 
-(Illustracion)
+(Ilustración)
 
-Este repositorio esta destinado a mostrar las diferentes maneras de codificar software del lado del backend. Tomando en cuenta la cantidad de conocimientos implementados en el. Segmente en 10 niveles, de manera progresiva mientras la persona adquiere conocimientos de diferentes areas que conciernen al desarrollo de software en general.
+Este repositorio esta destinado a mostrar las diferentes maneras de codificar software del lado del backend. Tomando en cuenta la cantidad de conocimientos implementados en el. Segmente en 10 niveles, de manera progresiva mientras la persona adquiere conocimientos de diferentes áreas que conciernen al desarrollo de software en general.
 
-Hay un nivel 0. Este nivel es cuando una persona escribe en Google "Como programar" y las semanas posiblemente busco "Como hacer una API" , posteriormente esa persona aprende que existen palabras claves como REST, HTTP, Autenticacions, Bases de Datos y un par mas que se te podran ocurrir. Con estos conocimientos recien adquiridos nuestro "jugador" empieza una aventura: Crear una API y mejorarla mediante el aumenta sus habilidades
+Hay un nivel 0. Este nivel es cuando una persona escribe en Google "Cómo programar" y las semanas posiblemente busco "Cómo hacer una API" , posteriormente esa persona aprende que existen palabras claves como REST, HTTP, Authentications, Bases de Datos y un par más que se te podrán ocurrir. Con estos conocimientos recién adquiridos nuestro "jugador" empieza una aventura: Crear una API y mejorarla mediante el aumento de sus habilidades
 
-## Negocio (De que trata nuestro software)
+## Negocio (¿De qué trata nuestro software?)
 
-(Illustracion)
+(Ilustración)
 
-Nuestro inexistente cliente quiere una API para clonar el funcionamiento de Medium, Creaciones de Articulos, Busqueda, Aplausos a Articulos, Comentarios, Login, Registro, Notificaciones por Correo Electronico.
+Nuestro inexistente cliente quiere una API para clonar el funcionamiento de Medium: Creación de Artículos, Búsqueda, Aplausos a Artículos, Comentarios, Inicio de Sesión, Registro, Notificaciones por Correo Electrónico.
 
-Esta API esta pensada para ser consumida por las aplicaciones mobiles y la aplicacion web que esta en desarrollo actualmente por otros desarrolladores, la tarea de nuestro querido jugador es crear esta API y que el cliente logre crear su propio Medium Clone y ser feliz.
+Esta API está pensada para ser consumida por las aplicaciones móviles y la aplicación web que están en desarrollo actualmente por otros desarrolladores, la tarea de nuestro querido jugador es crear esta API y que el cliente logre crear su propio Medium Clone y ser feliz.
 
-A continuacion se detallan todas las reglas de negocio de la API:
+A continuación se detallan todas las reglas de negocio de la API:
 
-### Creacion de Usuario, Registro y Actualizacion de Contrasena:
+### Creación de Usuario, Registro y Actualización de Contraseña:
 
-(Illustracion)
+(Ilustración)
 
-Cuando el usuario se registra o quiere cambiar su contrasena se le envia un correo con un token.
+Cuando el usuario se registra o quiere cambiar su contraseña se le envía un correo con un token.
 
 ### Usuario:
 
-(Illustracion)
+(Ilustración)
 
-Necesita un endpoint para obtener los articulos de un usuarios usando su identificador unico.
+Necesita un endpoint para obtener los artículos de un usuarios usando su identificador único.
 
-Cuando un usuario es etiquetado en un comentario se le envia un correo.
+Cuando un usuario es etiquetado en un comentario se le envía un correo.
 
-Un usuario puede crear articulos, eliminarlos y editarlos
+Un usuario puede crear, eliminar y editar artículos
 
 El usuario puede editar sus datos personales
 
 La imagen de perfil del usuario debe ser guardada
 
-Un Usuario puede collecionar N Articulos y agruparlos por un titulo
+Un Usuario puede coleccionar N Artículos y agruparlos por un título
 
-Un Usuario puede agregar a Bookmark un articulo
+Un Usuario puede agregar un Bookmark a un artículo
 
 ### Articulos:
 
-(Illustracion)
+(Ilustración)
 
 Se pueden comentar
 
-Se debe poder obtener un articulo, sus aplausos y sus comentarios.
+Se debe poder obtener un artículo, sus aplausos y sus comentarios.
 
-Cuando se crea el primer comentario en un articulo se le envia un correo al creador
+Cuando se crea el primer comentario en un artículo se le envía un correo al creador
 
-Los articulos son en formato README
+Los artículos son en formato Markdown
 
-Un articulo tiene titulo, una imagen opcional que se debe guardar y palabras claves asociadas
+Un articulo tiene título, una imagen opcional que se debe guardar y palabras claves asociadas
 
 ### Comentarios:
 
-(Illustracion)
+(Ilustración)
 
-Un comentario puede tener comentarios relacionados si el no tiene un comentario padre relacionado
+Un comentario puede tener comentarios relacionados si él no tiene un comentario padre relacionado
 
 Se pueden etiquetar usuarios en comentarios
 
-### Topicos:
+### Tópicos:
 
-(Illustracion)
+(Ilustración)
 
-Habra una serie de Topicos para relacionar Articulos a ellos, ejemplo (Salud, Economia)
+Habrá una serie de Tópicos para relacionar Artículos a ellos, ejemplo (Salud, Economía)
 
-Estos topicos deben estar definidos y el usuario no puede modificarlos
+Estos tópicos deben estar definidos y el usuario no puede modificarlos
 
-### Tags
+### Etiquetas
 
-(Illustracion)
+(Ilustración)
 
-Habra una serie de Etiquetas para relacionar Articulos a ellos, ejemplo (Javascript, Excel)
+Habrá una serie de Etiquetas para relacionar Artículos a ellos, ejemplo (Javascript, Excel)
 
-El usuario puede crear nuevos topicos si no existen
+El usuario puede crear nuevas Etiquetas si no existen
 
-### Search Engine
+### Motor de Búsqueda
 
-(Illustracion)
+(Ilustración)
 
-Se debe poder buscar por Tag, Topic, Titulo y Username con su debida paginacion
+Se debe poder buscar por Etiqueta, Tópico, Título y Nombre de usuario, con su debida paginación
 
 ### User Feed
 
-(Illustracion)
+(Ilustración)
 
-Debe haber una manera de adquirir los articulos que posiblemente el usuario quiere leer, como tambien
-articulos mas nuevos de las personas que el sigue o relacionados con topics que a el le guste
+Debe haber una manera de adquirir los artículos que posiblemente el usuario quiere leer, como también artículos más nuevos de las personas que él sigue o relacionados con tópicos que le gusten.
 
-## Habilidades intelectuales y practicas que el jugador debe mejorara y aprendera en cada nivel:
+## Habilidades intelectuales y prácticas que el jugador mejorará y aprenderá en cada nivel:
 
-(Desglozar cada uno) (Illustraciones)
+(Desglozar cada uno) (Ilustraciones)
 
 - Protocolos de transferencia de datos
 - Arquitectura de Software
 - Patrones de arquitectura de software
 - Paradigmas de bases de datos e implementaciones
-- Practicas de software
-- Patrones de disenos
+- Prácticas de software
+- Patrones de diseño
 - The Twelve Factor y su implementacion
-- Descomposicion de software
-- Sistemas Informaticos Distribuidos
-- Comprension de como evoluciona la Web y los estandares
+- Descomposición de software
+- Sistemas Informáticos Distribuidos
+- Comprensión de cómo evolucionan la Web y los estándares
 
-## Diagrama de relacion de entendidad (ERD)
+## Diagrama entendidad-relacion (ERD)
 
 
 ![medium-clone](https://user-images.githubusercontent.com/55514234/94639437-c7cca580-02a1-11eb-8630-cca4ec2ac92f.png)
