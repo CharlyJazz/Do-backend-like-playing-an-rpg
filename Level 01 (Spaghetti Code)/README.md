@@ -16,7 +16,7 @@ La transferencia de estado representacional es el quinto capitulo de la [tesis](
 
 * Endpoints:
 
-Los `endpoints` son las URL's a las cuales apuntan los servicios en nuestra API REST
+Los endpoints son las URL's a las cuales apuntan los servicios en nuestra API REST
 
 ## Creación de la Base de Datos
 
@@ -27,6 +27,6 @@ Usaremos una base de dato relacional usando MySQL, necesitamos tener un archivo 
 
 ## Creación de Servicios
 
-Los servicios los crearemos definiendo `endpoints`.
+Los servicios los crearemos definiendo endpoints.
 
-Crearemos un archivo llamado a`pi.py` en el cual implementaremos los servicios para la creacion de usuarios, articulos, sus comentarios y sus aplaudos.
+Crearemos un archivo llamado aapi.py en el cual implementaremos los servicios para la creacion de usuarios, articulos, sus comentarios y sus aplaudos.
