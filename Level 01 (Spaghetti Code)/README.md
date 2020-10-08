@@ -18,6 +18,11 @@ La transferencia de estado representacional es el quinto capítulo de la [tesis]
 
 Los endpoints son las URLs a las cuales apuntan los servicios en nuestra API REST.
 
+* CRUD:
+
+En informática, CRUD es el acrónimo de "Crear, Leer, Actualizar y Borrar" (del original en inglés: Create, Read, Update and Delete), que se usa para referirse a las funciones básicas en bases de datos o la capa de persistencia en un software.
+
+
 ## Creación de la Base de Datos
 
 Usaremos una base de datos relacional en MySQL. Necesitamos tener un archivo para crear la base de datos y sus respectivas tablas y relaciones.
@@ -29,3 +34,23 @@ Usaremos una base de datos relacional en MySQL. Necesitamos tener un archivo par
 Los servicios los crearemos definiendo endpoints.
 
 Crearemos un archivo llamado `api.py` en el cual implementaremos los servicios para la creación de usuarios, artículos, sus comentarios y sus aplausos.
+
+## Servicios a implementar
+
+* Creacion de Usuario (Registro)
+
+* CRUD Articulos
+
+* CRUD Comentarios en Articulos
+
+## Enlaces Externos
+
+CRUD: https://es.wikipedia.org/wiki/CRUD
+
+Como hacer una API En Flask https://www.youtube.com/watch?v=Esdj9wlBOaI
+
+REST: https://en.wikipedia.org/wiki/Representational_state_transfer
+
+REST Paper: https://www.ics.uci.edu/~fielding/pubs/dissertation/fielding_dissertation.pdf
+
+IETF Paper de HTTP: https://tools.ietf.org/html/rfc7231#section-4
