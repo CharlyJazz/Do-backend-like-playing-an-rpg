@@ -54,3 +54,5 @@ REST: https://en.wikipedia.org/wiki/Representational_state_transfer
 REST Paper: https://www.ics.uci.edu/~fielding/pubs/dissertation/fielding_dissertation.pdf
 
 IETF Paper de HTTP: https://tools.ietf.org/html/rfc7231#section-4
+
+Install MySQL: https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-20-04-es
