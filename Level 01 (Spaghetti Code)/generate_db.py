@@ -1,14 +1,14 @@
-#This script is here only to generate the database and tables we will be working with.
-# just add your credentials to your installation of mysql and run it on the terminal.
-# on a side  note if you ever want to restart the data base from 0 just run again this script
+# This script is here only to generate the database and tables we will be working with.
+# Just add your credentials for your installation of mysql and run it on the terminal.
+# On a side note, if you ever want to restart the data base from 0 just run it again.
 
 import mysql.connector as mysql
 
 # insert your respective MYSQL data here
 HOST = "localhost"
-DATABASE = "medium_clone" #name is up to you but this name is simplier and understable
-USER = "YOUR USER" #here goes your username to connecto to MYSQL
-PASSWORD = "YOUR PASSWORD" #here goes your password
+DATABASE = "medium_clone" # the database name is up to you but this one is simplie and understable
+USER = "YOUR USER" # here goes your username to connect to MySQL
+PASSWORD = "YOUR PASSWORD" # here goes the password you use to connect to MySQL
 
 
 # connect to mysql
