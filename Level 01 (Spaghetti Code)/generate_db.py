@@ -16,256 +16,260 @@ db_connection = mysql.connect(host=HOST, user=USER, password=PASSWORD)
 
 
 # cursor mysql connection
-mycursor = db_connection.cursor()
+my_cursor = db_connection.cursor()
 
 
 # database statements
-check_database = "DROP DATABASE IF EXISTS `medium_clone`"
-create_database = "CREATE DATABASE IF NOT EXISTS `medium_clone`"
-
-check_table_user = "DROP TABLE IF EXISTS `medium_clone`.`user`"
-create_table_user = """CREATE TABLE IF NOT EXISTS `medium_clone`.`user` (
-	`id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-	`create_at` DATETIME NOT NULL,
-	`update_at` DATETIME NULL,
-	`username` VARCHAR(20) NOT NULL,
-	`password` VARCHAR(15) NOT NULL,
-	`email` VARCHAR(255) NOT NULL,
-	`first_name` VARCHAR(45) NOT NULL,
-	`last_name` VARCHAR(45) NOT NULL,
-	`bio` VARCHAR(80) NULL,
-	`user_picture` TEXT NULL,
-	`token` VARCHAR(25) NULL,
-	`toke_at` DATETIME NULL,
-	`slug` VARCHAR(45) NOT NULL,
-	PRIMARY KEY (`id`));"""
+check_database = "DROP DATABASE IF EXISTS ``${DATABASE}``"
+create_database = "CREATE DATABASE IF NOT EXISTS ``${DATABASE}``"
 
 
-check_table_topics = "DROP TABLE IF EXISTS `medium_clone`.`topics`"
-create_table_topics = """CREATE TABLE IF NOT EXISTS `medium_clone`.`topics` (
-	`id` INT  UNSIGNED NOT NULL AUTO_INCREMENT,
-	`create_at` DATETIME NOT NULL,
-	`update_at` DATETIME NULL,
-	`name` VARCHAR(15) NOT NULL,
-	`description` VARCHAR(45) NOT NULL,
-	`topic_picture` TEXT NOT NULL,
-	`slug` VARCHAR(45) NOT NULL,
-	PRIMARY KEY (`id`));"""
+# helper to check the existence of the tables
+def check_table(table):
+    return "DROP TABLE IF EXISTS ``${DATABASE}``.``${table}``"
 
 
-check_table_tags = "DROP TABLE IF EXISTS `medium_clone`.`tags`"
-create_table_tags = """CREATE TABLE IF NOT EXISTS `medium_clone`.`tags` (
-	`id` INT  UNSIGNED NOT NULL AUTO_INCREMENT,
-	`create_at` DATETIME NOT NULL,
-	`update_at` DATETIME NULL,
-	`name` VARCHAR(30) NOT NULL,
-	`slug` VARCHAR(100) NOT NULL,
-	PRIMARY KEY (`id`));"""
+check_table_user = check_table("user")
+create_table_user = """CREATE TABLE IF NOT EXISTS ``${DATABASE}``.`user` (
+    `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    `create_at` DATETIME NOT NULL,
+    `update_at` DATETIME NULL,
+    `username` VARCHAR(20) NOT NULL,
+    `password` VARCHAR(15) NOT NULL,
+    `email` VARCHAR(255) NOT NULL,
+    `first_name` VARCHAR(45) NOT NULL,
+    `last_name` VARCHAR(45) NOT NULL,
+    `bio` VARCHAR(80) NULL,
+    `user_picture` TEXT NULL,
+    `token` VARCHAR(25) NULL,
+    `toke_at` DATETIME NULL,
+    `slug` VARCHAR(45) NOT NULL,
+    PRIMARY KEY (`id`));"""
 
 
-check_table_posts = "DROP TABLE IF EXISTS `medium_clone`.`posts`"
-create_table_posts = """CREATE TABLE IF NOT EXISTS `medium_clone`.`posts` (
-	`id` INT  UNSIGNED NOT NULL,
-	`create_at` DATETIME NOT NULL,
-	`update_at` DATETIME NULL,
-	`post_title` VARCHAR(100) NOT NULL,
-	`post_image` TEXT NOT NULL,
-	`short_description` VARCHAR(200) NOT NULL,
-	`body` TEXT NOT NULL,
-	`user_id` INT UNSIGNED NOT NULL,
-	`topic_id` INT UNSIGNED NOT NULL,
-	PRIMARY KEY (`id`),
-	INDEX `fk_user_idx` (`user_id` ASC) VISIBLE,
-	CONSTRAINT `fk_user_post_id`
+check_table_topics = check_table("topics")
+create_table_topics = """CREATE TABLE IF NOT EXISTS ``${DATABASE}``.`topics` (
+    `id` INT  UNSIGNED NOT NULL AUTO_INCREMENT,
+    `create_at` DATETIME NOT NULL,
+    `update_at` DATETIME NULL,
+    `name` VARCHAR(15) NOT NULL,
+    `description` VARCHAR(45) NOT NULL,
+    `topic_picture` TEXT NOT NULL,
+    `slug` VARCHAR(45) NOT NULL,
+    PRIMARY KEY (`id`));"""
+
+
+check_table_tags = check_table("tags")
+create_table_tags = """CREATE TABLE IF NOT EXISTS ``${DATABASE}``.`tags` (
+    `id` INT  UNSIGNED NOT NULL AUTO_INCREMENT,
+    `create_at` DATETIME NOT NULL,
+    `update_at` DATETIME NULL,
+    `name` VARCHAR(30) NOT NULL,
+    `slug` VARCHAR(100) NOT NULL,
+    PRIMARY KEY (`id`));"""
+
+
+check_table_posts = check_table("posts")
+create_table_posts = """CREATE TABLE IF NOT EXISTS ``${DATABASE}``.`posts` (
+    `id` INT  UNSIGNED NOT NULL,
+    `create_at` DATETIME NOT NULL,
+    `update_at` DATETIME NULL,
+    `post_title` VARCHAR(100) NOT NULL,
+    `post_image` TEXT NOT NULL,
+    `short_description` VARCHAR(200) NOT NULL,
+    `body` TEXT NOT NULL,
+    `user_id` INT UNSIGNED NOT NULL,
+    `topic_id` INT UNSIGNED NOT NULL,
+    PRIMARY KEY (`id`),
+    INDEX `fk_user_idx` (`user_id` ASC) VISIBLE,
+    CONSTRAINT `fk_user_post_id`
     FOREIGN KEY (`user_id`)
-    REFERENCES `medium_clone`.`user` (`id`)
+    REFERENCES ``${DATABASE}``.`user` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);"""
 
 
-check_table_bookmarks = "DROP TABLE IF EXISTS `medium_clone`.`bookmarks`"
-create_table_bookmarks = """CREATE TABLE IF NOT EXISTS `medium_clone`.`bookmarks` (
-	`id` INT  UNSIGNED NOT NULL AUTO_INCREMENT,
-	`create_at` DATETIME NOT NULL,
-	`update_at` DATETIME NULL,
-	`user_id` INT UNSIGNED NOT NULL,
-	`post_id` INT UNSIGNED NOT NULL,
-	PRIMARY KEY (`id`),
-	INDEX `fk_user_idx` (`user_id` ASC) VISIBLE,
-	INDEX `fk_post_idx` (`post_id` ASC) VISIBLE,
-	CONSTRAINT `fk_user_bookmars`
+check_table_bookmarks = check_table("bookmarks")
+create_table_bookmarks = """CREATE TABLE IF NOT EXISTS ``${DATABASE}``.`bookmarks` (
+    `id` INT  UNSIGNED NOT NULL AUTO_INCREMENT,
+    `create_at` DATETIME NOT NULL,
+    `update_at` DATETIME NULL,
+    `user_id` INT UNSIGNED NOT NULL,
+    `post_id` INT UNSIGNED NOT NULL,
+    PRIMARY KEY (`id`),
+    INDEX `fk_user_idx` (`user_id` ASC) VISIBLE,
+    INDEX `fk_post_idx` (`post_id` ASC) VISIBLE,
+    CONSTRAINT `fk_user_bookmars`
     FOREIGN KEY (`user_id`)
-    REFERENCES `medium_clone`.`user` (`id`)
+    REFERENCES ``${DATABASE}``.`user` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-	CONSTRAINT `fk_bookmarked_post`
+    CONSTRAINT `fk_bookmarked_post`
     FOREIGN KEY (`post_id`)
-    REFERENCES `medium_clone`.`posts` (`id`)
+    REFERENCES ``${DATABASE}``.`posts` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);"""
 
 
-check_table_claps = "DROP TABLE IF EXISTS `medium_clone`.`claps`"
-create_table_claps = """CREATE TABLE IF NOT EXISTS `medium_clone`.`claps` (
-	`id` INT  UNSIGNED NOT NULL AUTO_INCREMENT,
-	`create_at` DATETIME NOT NULL,
-	`update_at` DATETIME NULL,
-	`total_count` INT UNSIGNED NULL,
-	`post_id` INT UNSIGNED NOT NULL,
-	`user_id` INT UNSIGNED NOT NULL,
-	PRIMARY KEY (`id`),
-	INDEX `fk_posts_idx` (`post_id` ASC) VISIBLE,
-	INDEX `fk_user_id_idx` (`user_id` ASC) VISIBLE,
-	CONSTRAINT `fk_clapped_post_id`
+check_table_claps = check_table("claps")
+create_table_claps = """CREATE TABLE IF NOT EXISTS ``${DATABASE}``.`claps` (
+    `id` INT  UNSIGNED NOT NULL AUTO_INCREMENT,
+    `create_at` DATETIME NOT NULL,
+    `update_at` DATETIME NULL,
+    `total_count` INT UNSIGNED NULL,
+    `post_id` INT UNSIGNED NOT NULL,
+    `user_id` INT UNSIGNED NOT NULL,
+    PRIMARY KEY (`id`),
+    INDEX `fk_posts_idx` (`post_id` ASC) VISIBLE,
+    INDEX `fk_user_id_idx` (`user_id` ASC) VISIBLE,
+    CONSTRAINT `fk_clapped_post_id`
     FOREIGN KEY (`post_id`)
-    REFERENCES `medium_clone`.`posts` (`id`)
+    REFERENCES ``${DATABASE}``.`posts` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-	CONSTRAINT `fk_user_claps_id`
+    CONSTRAINT `fk_user_claps_id`
     FOREIGN KEY (`user_id`)
-    REFERENCES `medium_clone`.`user` (`id`)
+    REFERENCES ``${DATABASE}``.`user` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);"""
 
 
-check_table_collections = "DROP TABLE IF EXISTS `medium_clone`.`collections`"
-create_table_collections = """CREATE TABLE IF NOT EXISTS `medium_clone`.`collections` (
-	`id` INT  UNSIGNED NOT NULL AUTO_INCREMENT,
-	`create_at` DATETIME NOT NULL,
-	`update_at` DATETIME NULL,
-	`title` VARCHAR(200) NOT NULL,
-	`collection_image` TEXT NULL,
-	`slug` VARCHAR(100) NOT NULL,
-	`user_id` INT UNSIGNED NOT NULL ,
-	PRIMARY KEY (`id`),
-	INDEX `fk_user_idx` (`user_id` ASC) VISIBLE,
-	CONSTRAINT `fk_user_collection_id`
+check_table_collections = check_table("collections")
+create_table_collections = """CREATE TABLE IF NOT EXISTS ``${DATABASE}``.`collections` (
+    `id` INT  UNSIGNED NOT NULL AUTO_INCREMENT,
+    `create_at` DATETIME NOT NULL,
+    `update_at` DATETIME NULL,
+    `title` VARCHAR(200) NOT NULL,
+    `collection_image` TEXT NULL,
+    `slug` VARCHAR(100) NOT NULL,
+    `user_id` INT UNSIGNED NOT NULL ,
+    PRIMARY KEY (`id`),
+    INDEX `fk_user_idx` (`user_id` ASC) VISIBLE,
+    CONSTRAINT `fk_user_collection_id`
     FOREIGN KEY (`user_id`)
-    REFERENCES `medium_clone`.`user` (`id`)
+    REFERENCES ``${DATABASE}``.`user` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);"""
 
 
-check_table_collections_posts = (
-    "DROP TABLE IF EXISTS `medium_clone`.`collentions_posts`"
-)
-create_table_collections_posts = """CREATE TABLE IF NOT EXISTS `medium_clone`.`collections_posts` (
-	`id` INT  UNSIGNED NOT NULL AUTO_INCREMENT,
-	`create_at` DATETIME NOT NULL,
-	`update_at` DATETIME NULL,
-	`post_id` INT UNSIGNED NOT NULL,
-	`collections_id` INT UNSIGNED NOT NULL,
-	PRIMARY KEY (`id`),
-	INDEX `fk_collections_idx` (`collections_id` ASC) VISIBLE,
-	INDEX `fk_post_idx` (`post_id` ASC) VISIBLE,
-	CONSTRAINT `fk_collections_id`
+check_table_collections_posts = check_table("collections_posts")
+create_table_collections_posts = """CREATE TABLE IF NOT EXISTS ``${DATABASE}``.`collections_posts` (
+    `id` INT  UNSIGNED NOT NULL AUTO_INCREMENT,
+    `create_at` DATETIME NOT NULL,
+    `update_at` DATETIME NULL,
+    `post_id` INT UNSIGNED NOT NULL,
+    `collections_id` INT UNSIGNED NOT NULL,
+    PRIMARY KEY (`id`),
+    INDEX `fk_collections_idx` (`collections_id` ASC) VISIBLE,
+    INDEX `fk_post_idx` (`post_id` ASC) VISIBLE,
+    CONSTRAINT `fk_collections_id`
     FOREIGN KEY (`collections_id`)
-    REFERENCES `medium_clone`.`collections` (`id`)
+    REFERENCES ``${DATABASE}``.`collections` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-	CONSTRAINT `fk_post_collections_id`
+    CONSTRAINT `fk_post_collections_id`
     FOREIGN KEY (`post_id`)
-    REFERENCES `medium_clone`.`posts` (`id`)
+    REFERENCES ``${DATABASE}``.`posts` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);"""
 
 
-check_table_comments = "DROP TABLE IF EXISTS `medium_clone`.`comments`"
-create_table_comments = """CREATE TABLE IF NOT EXISTS `medium_clone`.`comments` (
-	`id` INT  UNSIGNED NOT NULL AUTO_INCREMENT,
-	`create_at` DATETIME NOT NULL,
-	`update_at` DATETIME NULL,
-	`post_id` INT UNSIGNED NULL,
-	`body` TEXT(255) NOT NULL,
-	`parent_id` INT UNSIGNED NULL,
-	`user_id` INT UNSIGNED NOT NULL,
-	PRIMARY KEY (`id`),
-	INDEX `fk_parent_idx` (`parent_id` ASC) VISIBLE,
-	INDEX `fk_user_idx` (`user_id` ASC) VISIBLE,
-	INDEX `fk_post_id_idx` (`post_id` ASC) VISIBLE,
-	CONSTRAINT `fk_user_comment`
+check_table_comments = check_table("comments")
+create_table_comments = """CREATE TABLE IF NOT EXISTS ``${DATABASE}``.`comments` (
+    `id` INT  UNSIGNED NOT NULL AUTO_INCREMENT,
+    `create_at` DATETIME NOT NULL,
+    `update_at` DATETIME NULL,
+    `post_id` INT UNSIGNED NULL,
+    `body` TEXT(255) NOT NULL,
+    `parent_id` INT UNSIGNED NULL,
+    `user_id` INT UNSIGNED NOT NULL,
+    PRIMARY KEY (`id`),
+    INDEX `fk_parent_idx` (`parent_id` ASC) VISIBLE,
+    INDEX `fk_user_idx` (`user_id` ASC) VISIBLE,
+    INDEX `fk_post_id_idx` (`post_id` ASC) VISIBLE,
+    CONSTRAINT `fk_user_comment`
     FOREIGN KEY (`user_id`)
-    REFERENCES `medium_clone`.`user` (`id`)
+    REFERENCES ``${DATABASE}``.`user` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-	CONSTRAINT `fk_parent_comment`
+    CONSTRAINT `fk_parent_comment`
     FOREIGN KEY (`parent_id`)
-    REFERENCES `medium_clone`.`comments` (`id`)
+    REFERENCES ``${DATABASE}``.`comments` (`id`)
     ON DELETE CASCADE
     ON UPDATE NO ACTION,
-	CONSTRAINT `fk_comment_post_id`
+    CONSTRAINT `fk_comment_post_id`
     FOREIGN KEY (`post_id`)
-    REFERENCES `medium_clone`.`posts` (`id`)
+    REFERENCES ``${DATABASE}``.`posts` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);"""
 
 
-check_table_posts_tags = "DROP TABLE IF EXISTS `medium_clone`.`posts_tags`"
-create_table_posts_tags = """CREATE TABLE IF NOT EXISTS `medium_clone`.`followers` (
-	`id` INT  UNSIGNED NOT NULL AUTO_INCREMENT,
-	`create_at` DATETIME NULL,
-	`update_at` DATETIME NULL,
-	`following_user_id` INT UNSIGNED NOT NULL,
-	`followed_user_id` INT UNSIGNED NOT NULL,
-	`unfollowed_date` DATETIME NULL,
-	PRIMARY KEY (`id`),
-	INDEX `fk_followed_id_idx` (`followed_user_id` ASC) VISIBLE,
-	INDEX `fk_following_id_idx` (`following_user_id` ASC) VISIBLE,
-	CONSTRAINT `fk_followed_id`
+check_table_posts_tags = check_table("posts_tags")
+create_table_posts_tags = """CREATE TABLE IF NOT EXISTS ``${DATABASE}``.`followers` (
+    `id` INT  UNSIGNED NOT NULL AUTO_INCREMENT,
+    `create_at` DATETIME NULL,
+    `update_at` DATETIME NULL,
+    `following_user_id` INT UNSIGNED NOT NULL,
+    `followed_user_id` INT UNSIGNED NOT NULL,
+    `unfollowed_date` DATETIME NULL,
+    PRIMARY KEY (`id`),
+    INDEX `fk_followed_id_idx` (`followed_user_id` ASC) VISIBLE,
+    INDEX `fk_following_id_idx` (`following_user_id` ASC) VISIBLE,
+    CONSTRAINT `fk_followed_id`
     FOREIGN KEY (`followed_user_id`)
-    REFERENCES `medium_clone`.`user` (`id`)
+    REFERENCES ``${DATABASE}``.`user` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-	CONSTRAINT `fk_following_id`
+    CONSTRAINT `fk_following_id`
     FOREIGN KEY (`following_user_id`)
-    REFERENCES `medium_clone`.`user` (`id`)
+    REFERENCES ``${DATABASE}``.`user` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);;"""
 
 
-check_table_followers = "DROP TABLE IF EXISTS `medium_clone`.`followers` "
-create_table_followers = """CREATE TABLE IF NOT EXISTS `medium_clone`.`followers` (
-	`id` INT  UNSIGNED NOT NULL AUTO_INCREMENT,
-	`create_at` DATETIME NULL,
-	`update_at` DATETIME NULL,
-	`following_user_id` INT UNSIGNED NOT NULL,
-	`followed_user_id` INT UNSIGNED NOT NULL,
-	`unfollowed_date` DATETIME NULL,
-	PRIMARY KEY (`id`),
-	INDEX `fk_followed_id_idx` (`followed_user_id` ASC) VISIBLE,
-	INDEX `fk_following_id_idx` (`following_user_id` ASC) VISIBLE,
-	CONSTRAINT `fk_followed_id`
+check_table_followers = check_table("followers")
+create_table_followers = """CREATE TABLE IF NOT EXISTS ``${DATABASE}``.`followers` (
+    `id` INT  UNSIGNED NOT NULL AUTO_INCREMENT,
+    `create_at` DATETIME NULL,
+    `update_at` DATETIME NULL,
+    `following_user_id` INT UNSIGNED NOT NULL,
+    `followed_user_id` INT UNSIGNED NOT NULL,
+    `unfollowed_date` DATETIME NULL,
+    PRIMARY KEY (`id`),
+    INDEX `fk_followed_id_idx` (`followed_user_id` ASC) VISIBLE,
+    INDEX `fk_following_id_idx` (`following_user_id` ASC) VISIBLE,
+    CONSTRAINT `fk_followed_id`
     FOREIGN KEY (`followed_user_id`)
-    REFERENCES `medium_clone`.`user` (`id`)
+    REFERENCES ``${DATABASE}``.`user` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-	CONSTRAINT `fk_following_id`
+    CONSTRAINT `fk_following_id`
     FOREIGN KEY (`following_user_id`)
-    REFERENCES `medium_clone`.`user` (`id`)
+    REFERENCES ``${DATABASE}``.`user` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);"""
 
 
-check_table_posts_topics = "DROP TABLE IF EXISTS `medium_clone`.`posts_topics` "
-create_table_posts_topics = """CREATE TABLE IF NOT EXISTS `medium_clone`.`posts_topics` (
-	`posts_id` INT  UNSIGNED NOT NULL AUTO_INCREMENT,
-	`topics_id` INT  UNSIGNED NOT NULL,
-	PRIMARY KEY (`posts_id`, `topics_id`),
-	INDEX `fk_posts_has_topics_topics1_idx` (`topics_id` ASC) VISIBLE,
-	INDEX `fk_posts_has_topics_posts1_idx` (`posts_id` ASC) VISIBLE,
-	CONSTRAINT `fk_post_id`
+check_table_posts_topics = check_table("posts_topics")
+create_table_posts_topics = """CREATE TABLE IF NOT EXISTS ``${DATABASE}``.`posts_topics` (
+    `posts_id` INT  UNSIGNED NOT NULL AUTO_INCREMENT,
+    `topics_id` INT  UNSIGNED NOT NULL,
+    PRIMARY KEY (`posts_id`, `topics_id`),
+    INDEX `fk_posts_has_topics_topics1_idx` (`topics_id` ASC) VISIBLE,
+    INDEX `fk_posts_has_topics_posts1_idx` (`posts_id` ASC) VISIBLE,
+    CONSTRAINT `fk_post_id`
     FOREIGN KEY (`posts_id`)
-    REFERENCES `medium_clone`.`posts` (`id`)
+    REFERENCES ``${DATABASE}``.`posts` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-	CONSTRAINT `fk_post_topic_id`
+    CONSTRAINT `fk_post_topic_id`
     FOREIGN KEY (`topics_id`)
-    REFERENCES `medium_clone`.`topics` (`id`)
+    REFERENCES ``${DATABASE}``.`topics` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);"""
 
 
-statements_lists = [
+statement_list = [
     check_database,
     create_database,
     check_table_user,
@@ -294,5 +298,5 @@ statements_lists = [
     create_table_posts_topics,
 ]
 
-for statements in statements_lists:
-    mycursor.execute(statements)
+for statement in statement_list:
+    my_cursor.execute(statement)
