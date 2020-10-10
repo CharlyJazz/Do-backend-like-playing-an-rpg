@@ -26,7 +26,7 @@ En informática, CRUD es el acrónimo de "Crear, Leer, Actualizar y Borrar" (del
 
 Usaremos una base de datos relacional en MySQL. Necesitamos tener un archivo para crear la base de datos y sus respectivas tablas y relaciones.
 
-`generate_db.py` será el archivo que al ser ejecutado revisará si la base de datos existe y en caso contrario la creará junto con sus tablas.
+`generate_db.py` será el archivo que al ser ejecutado revisará si la base de datos existe y en caso contrario la creará junto con sus tablas. Será necesario que edites por lo menos las constantes `USER` y `PASSWORD` como en él se indica para que se ejecute exitosamente.
 
 ## Creación de Servicios
 
