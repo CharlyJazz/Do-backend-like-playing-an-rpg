@@ -22,12 +22,11 @@ Los endpoints son las URLs a las cuales apuntan los servicios en nuestra API RES
 
 En informática, CRUD es el acrónimo de "Crear, Leer, Actualizar y Borrar" (del original en inglés: Create, Read, Update and Delete), que se usa para referirse a las funciones básicas en bases de datos o la capa de persistencia en un software.
 
-
 ## Creación de la Base de Datos
 
 Usaremos una base de datos relacional en MySQL. Necesitamos tener un archivo para crear la base de datos y sus respectivas tablas y relaciones.
 
-`generate_db.py` será el archivo que al ser ejecutado revisará si la base de datos existe y en caso contrario la creará junto con sus tablas.
+`generate_db.py` será el archivo que al ser ejecutado revisará si la base de datos existe y en caso contrario la creará junto con sus tablas. Será necesario que edites por lo menos las constantes `USER` y `PASSWORD` como en él se indica para que se ejecute exitosamente.
 
 ## Creación de Servicios
 
@@ -47,12 +46,12 @@ Crearemos un archivo llamado `api.py` en el cual implementaremos los servicios p
 
 CRUD: https://es.wikipedia.org/wiki/CRUD
 
-Como hacer una API En Flask https://www.youtube.com/watch?v=Esdj9wlBOaI
+Cómo hacer una API En Flask: https://www.youtube.com/watch?v=Esdj9wlBOaI
 
 REST: https://en.wikipedia.org/wiki/Representational_state_transfer
 
-REST Paper: https://www.ics.uci.edu/~fielding/pubs/dissertation/fielding_dissertation.pdf
+Tesis que introduce el concepto de REST: https://www.ics.uci.edu/~fielding/pubs/dissertation/fielding_dissertation.pdf
 
-IETF Paper de HTTP: https://tools.ietf.org/html/rfc7231#section-4
+Artículo de la IETF que define HTTP (sección sobre los métodos): https://tools.ietf.org/html/rfc7231#section-4
 
-Install MySQL: https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-20-04-es
+Tutorial que ilustra cómo instalar MySQL: https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-20-04-es
