@@ -5,7 +5,7 @@
 import mysql.connector as mysql
 
 # insert your respective MYSQL data here
-HOST = "localhost"
+HOST = "localhost" # the host in which your database runs, shouldn't need to be changed
 DATABASE = "medium_clone" # the database name is up to you but this one is simplie and understable
 USER = "YOUR USERNAME" # here goes your username to connect to MySQL
 PASSWORD = "YOUR PASSWORD" # here goes the password you use to connect to MySQL
