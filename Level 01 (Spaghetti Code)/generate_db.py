@@ -6,9 +6,9 @@ import mysql.connector as mysql
 
 # insert your respective MYSQL data here
 HOST = "localhost"
-DATABASE = "medium_clone"  # the database name is up to you but this one is simplie and understable
-USER = "YOUR USERNAME"  # here goes your username to connect to MySQL
-PASSWORD = "YOUR PASSWORD"  # here goes the password you use to connect to MySQL
+DATABASE = "medium_clone" # the database name is up to you but this one is simplie and understable
+USER = "YOUR USERNAME" # here goes your username to connect to MySQL
+PASSWORD = "YOUR PASSWORD" # here goes the password you use to connect to MySQL
 
 
 # connect to mysql
@@ -49,7 +49,7 @@ create_table_user = f"""CREATE TABLE IF NOT EXISTS `{DATABASE}`.`user` (
 
 check_table_topics = check_table("topics")
 create_table_topics = f"""CREATE TABLE IF NOT EXISTS `{DATABASE}`.`topics` (
-    `id` INT  UNSIGNED NOT NULL AUTO_INCREMENT,
+    `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
     `create_at` DATETIME NOT NULL,
     `update_at` DATETIME NULL,
     `name` VARCHAR(15) NOT NULL,
@@ -61,7 +61,7 @@ create_table_topics = f"""CREATE TABLE IF NOT EXISTS `{DATABASE}`.`topics` (
 
 check_table_tags = check_table("tags")
 create_table_tags = f"""CREATE TABLE IF NOT EXISTS `{DATABASE}`.`tags` (
-    `id` INT  UNSIGNED NOT NULL AUTO_INCREMENT,
+    `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
     `create_at` DATETIME NOT NULL,
     `update_at` DATETIME NULL,
     `name` VARCHAR(30) NOT NULL,
@@ -71,7 +71,7 @@ create_table_tags = f"""CREATE TABLE IF NOT EXISTS `{DATABASE}`.`tags` (
 
 check_table_posts = check_table("posts")
 create_table_posts = f"""CREATE TABLE IF NOT EXISTS `{DATABASE}`.`posts` (
-    `id` INT  UNSIGNED NOT NULL,
+    `id` INT UNSIGNED NOT NULL,
     `create_at` DATETIME NOT NULL,
     `update_at` DATETIME NULL,
     `post_title` VARCHAR(100) NOT NULL,
@@ -91,7 +91,7 @@ create_table_posts = f"""CREATE TABLE IF NOT EXISTS `{DATABASE}`.`posts` (
 
 check_table_bookmarks = check_table("bookmarks")
 create_table_bookmarks = f"""CREATE TABLE IF NOT EXISTS `{DATABASE}`.`bookmarks` (
-    `id` INT  UNSIGNED NOT NULL AUTO_INCREMENT,
+    `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
     `create_at` DATETIME NOT NULL,
     `update_at` DATETIME NULL,
     `user_id` INT UNSIGNED NOT NULL,
@@ -113,7 +113,7 @@ create_table_bookmarks = f"""CREATE TABLE IF NOT EXISTS `{DATABASE}`.`bookmarks`
 
 check_table_claps = check_table("claps")
 create_table_claps = f"""CREATE TABLE IF NOT EXISTS `{DATABASE}`.`claps` (
-    `id` INT  UNSIGNED NOT NULL AUTO_INCREMENT,
+    `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
     `create_at` DATETIME NOT NULL,
     `update_at` DATETIME NULL,
     `total_count` INT UNSIGNED NULL,
@@ -136,7 +136,7 @@ create_table_claps = f"""CREATE TABLE IF NOT EXISTS `{DATABASE}`.`claps` (
 
 check_table_collections = check_table("collections")
 create_table_collections = f"""CREATE TABLE IF NOT EXISTS `{DATABASE}`.`collections` (
-    `id` INT  UNSIGNED NOT NULL AUTO_INCREMENT,
+    `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
     `create_at` DATETIME NOT NULL,
     `update_at` DATETIME NULL,
     `title` VARCHAR(200) NOT NULL,
@@ -154,7 +154,7 @@ create_table_collections = f"""CREATE TABLE IF NOT EXISTS `{DATABASE}`.`collecti
 
 check_table_collections_posts = check_table("collections_posts")
 create_table_collections_posts = f"""CREATE TABLE IF NOT EXISTS `{DATABASE}`.`collections_posts` (
-    `id` INT  UNSIGNED NOT NULL AUTO_INCREMENT,
+    `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
     `create_at` DATETIME NOT NULL,
     `update_at` DATETIME NULL,
     `post_id` INT UNSIGNED NOT NULL,
@@ -176,7 +176,7 @@ create_table_collections_posts = f"""CREATE TABLE IF NOT EXISTS `{DATABASE}`.`co
 
 check_table_comments = check_table("comments")
 create_table_comments = f"""CREATE TABLE IF NOT EXISTS `{DATABASE}`.`comments` (
-    `id` INT  UNSIGNED NOT NULL AUTO_INCREMENT,
+    `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
     `create_at` DATETIME NOT NULL,
     `update_at` DATETIME NULL,
     `post_id` INT UNSIGNED NULL,
@@ -228,7 +228,7 @@ create_table_posts_tags = f"""CREATE TABLE IF NOT EXISTS `{DATABASE}`.`posts_tag
 
 check_table_followers = check_table("followers")
 create_table_followers = f"""CREATE TABLE IF NOT EXISTS `{DATABASE}`.`followers` (
-    `id` INT  UNSIGNED NOT NULL AUTO_INCREMENT,
+    `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
     `create_at` DATETIME NULL,
     `update_at` DATETIME NULL,
     `following_user_id` INT UNSIGNED NOT NULL,
@@ -251,8 +251,8 @@ create_table_followers = f"""CREATE TABLE IF NOT EXISTS `{DATABASE}`.`followers`
 
 check_table_posts_topics = check_table("posts_topics")
 create_table_posts_topics = f"""CREATE TABLE IF NOT EXISTS `{DATABASE}`.`posts_topics` (
-    `posts_id` INT  UNSIGNED NOT NULL AUTO_INCREMENT,
-    `topics_id` INT  UNSIGNED NOT NULL,
+    `posts_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    `topics_id` INT UNSIGNED NOT NULL,
     PRIMARY KEY (`posts_id`, `topics_id`),
     INDEX `fk_posts_has_topics_topics1_idx` (`topics_id` ASC) VISIBLE,
     INDEX `fk_posts_has_topics_posts1_idx` (`posts_id` ASC) VISIBLE,
