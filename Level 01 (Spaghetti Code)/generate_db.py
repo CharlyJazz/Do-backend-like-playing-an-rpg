@@ -29,8 +29,8 @@ def check_table(table):
     return f"DROP TABLE IF EXISTS `{DATABASE}`.`{table}`"
 
 
-check_table_user = check_table("user")
-create_table_user = f"""CREATE TABLE IF NOT EXISTS `{DATABASE}`.`user` (
+check_table_users = check_table("users")
+create_table_users = f"""CREATE TABLE IF NOT EXISTS `{DATABASE}`.`users` (
     `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
     `create_at` DATETIME NOT NULL,
     `update_at` DATETIME NULL,
@@ -84,7 +84,7 @@ create_table_posts = f"""CREATE TABLE IF NOT EXISTS `{DATABASE}`.`posts` (
     INDEX `fk_user_idx` (`user_id` ASC) VISIBLE,
     CONSTRAINT `fk_user_post_id`
     FOREIGN KEY (`user_id`)
-    REFERENCES `{DATABASE}`.`user` (`id`)
+    REFERENCES `{DATABASE}`.`users` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);"""
 
@@ -101,7 +101,7 @@ create_table_bookmarks = f"""CREATE TABLE IF NOT EXISTS `{DATABASE}`.`bookmarks`
     INDEX `fk_post_idx` (`post_id` ASC) VISIBLE,
     CONSTRAINT `fk_user_bookmars`
     FOREIGN KEY (`user_id`)
-    REFERENCES `{DATABASE}`.`user` (`id`)
+    REFERENCES `{DATABASE}`.`users` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
     CONSTRAINT `fk_bookmarked_post`
@@ -129,7 +129,7 @@ create_table_claps = f"""CREATE TABLE IF NOT EXISTS `{DATABASE}`.`claps` (
     ON UPDATE NO ACTION,
     CONSTRAINT `fk_user_claps_id`
     FOREIGN KEY (`user_id`)
-    REFERENCES `{DATABASE}`.`user` (`id`)
+    REFERENCES `{DATABASE}`.`users` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);"""
 
@@ -147,7 +147,7 @@ create_table_collections = f"""CREATE TABLE IF NOT EXISTS `{DATABASE}`.`collecti
     INDEX `fk_user_idx` (`user_id` ASC) VISIBLE,
     CONSTRAINT `fk_user_collection_id`
     FOREIGN KEY (`user_id`)
-    REFERENCES `{DATABASE}`.`user` (`id`)
+    REFERENCES `{DATABASE}`.`users` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);"""
 
@@ -189,7 +189,7 @@ create_table_comments = f"""CREATE TABLE IF NOT EXISTS `{DATABASE}`.`comments` (
     INDEX `fk_post_id_idx` (`post_id` ASC) VISIBLE,
     CONSTRAINT `fk_user_comment`
     FOREIGN KEY (`user_id`)
-    REFERENCES `{DATABASE}`.`user` (`id`)
+    REFERENCES `{DATABASE}`.`users` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
     CONSTRAINT `fk_parent_comment`
@@ -239,12 +239,12 @@ create_table_followers = f"""CREATE TABLE IF NOT EXISTS `{DATABASE}`.`followers`
     INDEX `fk_following_id_idx` (`following_user_id` ASC) VISIBLE,
     CONSTRAINT `fk_followed_id`
     FOREIGN KEY (`followed_user_id`)
-    REFERENCES `{DATABASE}`.`user` (`id`)
+    REFERENCES `{DATABASE}`.`users` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
     CONSTRAINT `fk_following_id`
     FOREIGN KEY (`following_user_id`)
-    REFERENCES `{DATABASE}`.`user` (`id`)
+    REFERENCES `{DATABASE}`.`users` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);"""
 
@@ -271,8 +271,8 @@ create_table_posts_topics = f"""CREATE TABLE IF NOT EXISTS `{DATABASE}`.`posts_t
 statement_list = [
     check_database,
     create_database,
-    check_table_user,
-    create_table_user,
+    check_table_users,
+    create_table_users,
     check_table_topics,
     create_table_topics,
     check_table_tags,
