@@ -43,7 +43,6 @@ create_table_users = f"""CREATE TABLE IF NOT EXISTS `{DATABASE}`.`users` (
     `user_picture` TEXT NULL,
     `token` VARCHAR(25) NULL,
     `toke_at` DATETIME NULL,
-    `slug` VARCHAR(45) NOT NULL,
     PRIMARY KEY (`id`));"""
 
 
