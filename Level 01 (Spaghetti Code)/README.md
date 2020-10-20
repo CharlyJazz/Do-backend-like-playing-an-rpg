@@ -1,26 +1,10 @@
 # Level 01 (Spaghetti Code)
 
-Para empezar a construir la API tendremos en cuenta los siguientes términos:
+En este nivel se creara un script para definir el esquema de la base de datos. Se creara un archivo `app.py` donde correra el servidor de nuestra API REST y donde se crearan 4 endpoints para hacer un par de funcionalidades.
 
-* API:
+La clave de este nivel es observar lo dificil que es programar de esta manera, sin una arquitectura definida y con un monton de logicas diferentes en el mismo archivo `app.py` haciendo de este archivo largo e inestablemente incomodo.
 
-Interfaz que conecta un Software con Otro. Por ejemplo: una aplicación móvil se puede conectar a este Backend mediante la API que estaremos creando.
-
-* Servicios:
-
-Usualmente los servicios se refieren a cada parte de la API que cumple un rol espefício, en nuestro caso tendremos un servicio para Crear Artículos, otro para Crear Comentarios, otro para Registrar un Usuario, y así sucesivamente.
-
-* REST:
-
-La transferencia de estado representacional es el quinto capítulo de la [tesis](https://www.ics.uci.edu/~fielding/pubs/dissertation/top.htm) escrita por Roy Fielding, que plantea cómo conectar diferentes sistemas a nivel de protocolos de transferencia de datos. Actualmente REST se asocia con APIs y HTTP para la creacion de arquitecturas orientadas a servicios, como la nuestra.
-
-* Endpoints:
-
-Los endpoints son las URLs a las cuales apuntan los servicios en nuestra API REST.
-
-* CRUD:
-
-En informática, CRUD es el acrónimo de "Crear, Leer, Actualizar y Borrar" (del original en inglés: Create, Read, Update and Delete), que se usa para referirse a las funciones básicas en bases de datos o la capa de persistencia en un software.
+Muy Importante dominar conceptos como: REST, API, Endpoints, HTTP, Servicios.
 
 ## Creación de la Base de Datos
 
@@ -34,13 +18,27 @@ Los servicios los crearemos definiendo endpoints.
 
 Crearemos un archivo llamado `api.py` en el cual implementaremos los servicios para la creación de usuarios, artículos, sus comentarios y sus aplausos.
 
+Implementaremos estados HTTP como 202, 200, 404 para diferentes escenarios de los endpoints.
+
+Tambien te tendra en cuenta el uso semantico de los metodos HTTP. [Info](https://tools.ietf.org/html/rfc7231#section-4)
+
 ## Servicios a implementar
 
 * Creacion de Usuario (Registro)
 
-* CRUD Articulos
+* Obtener usuario por su ID
 
-* CRUD Comentarios en Articulos
+* Obtener todos los usuarios
+
+* Crear Articulos
+
+## Habilidades adquiridas al dominar este nivel
+
+- Comprensión de cómo evolucionan la Web y los estándares
+
+- Paradigmas de bases de datos e implementaciones
+
+- Protocolos de transferencia de datos
 
 ## Enlaces Externos
 
