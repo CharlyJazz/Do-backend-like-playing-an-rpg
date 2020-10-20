@@ -111,4 +111,4 @@ Debe haber una manera de adquirir los artículos que posiblemente el usuario qui
 
 ## Diagrama entendidad-relacion (ERD)
 
-![medium-clone](https://user-images.githubusercontent.com/55514234/94639437-c7cca580-02a1-11eb-8630-cca4ec2ac92f.png)
+![medium-clone](https://user-images.githubusercontent.com/55514234/96534018-8f8f0600-1254-11eb-84f6-836635d63f01.png)
