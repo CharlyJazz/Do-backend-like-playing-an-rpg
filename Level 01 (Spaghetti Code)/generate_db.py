@@ -5,10 +5,10 @@
 import mysql.connector as mysql
 
 # insert your respective MYSQL data here
-HOST = "localhost" # the host in which your database runs, shouldn't need to be changed
-DATABASE = "medium_clone" # the database name is up to you but this one is simplie and understable
-USER = "YOUR USERNAME" # here goes your username to connect to MySQL
-PASSWORD = "YOUR PASSWORD" # here goes the password you use to connect to MySQL
+HOST = "localhost"  # the host in which your database runs, shouldn't need to be changed
+DATABASE = "medium_clone"  # the database name is up to you but this one is simplie and understable
+USER = "YOUR USER"  # here goes your username to connect to MySQL
+PASSWORD = "YOUR_PASSWORD"  # here goes the password you use to connect to MySQL
 
 
 # connect to mysql
@@ -41,6 +41,7 @@ create_table_users = f"""CREATE TABLE IF NOT EXISTS `{DATABASE}`.`users` (
     `last_name` VARCHAR(45) NOT NULL,
     `bio` VARCHAR(80) NULL,
     `user_picture` TEXT NULL,
+    `active` TINYINT NOT NULL DEFAULT 1,
     `token` VARCHAR(25) NULL,
     `toke_at` DATETIME NULL,
     PRIMARY KEY (`id`));"""
@@ -70,7 +71,7 @@ create_table_tags = f"""CREATE TABLE IF NOT EXISTS `{DATABASE}`.`tags` (
 
 check_table_posts = check_table("posts")
 create_table_posts = f"""CREATE TABLE IF NOT EXISTS `{DATABASE}`.`posts` (
-    `id` INT UNSIGNED NOT NULL,
+    `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
     `create_at` DATETIME NOT NULL,
     `update_at` DATETIME NULL,
     `post_title` VARCHAR(100) NOT NULL,
