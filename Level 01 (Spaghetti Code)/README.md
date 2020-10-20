@@ -4,7 +4,7 @@ En este nivel se creara un script para definir el esquema de la base de datos. S
 
 La clave de este nivel es observar lo dificil que es programar de esta manera, sin una arquitectura definida y con un monton de logicas diferentes en el mismo archivo `app.py` haciendo de este archivo largo e inestablemente incomodo.
 
-Muy Importante dominar conceptos como: REST, API, Endpoints, HTTP, Servicios.
+Muy Importante conocer conceptos como: REST, API, Endpoints, HTTP, Servicios, Base de Dato, SQL.
 
 ## Creación de la Base de Datos
 
