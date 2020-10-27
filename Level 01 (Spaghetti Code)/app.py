@@ -35,7 +35,7 @@ def get_users():
     all_users = my_cursor.fetchall()
 
     if len(all_users) == 0:
-        return {"status": 200, "message": "There are no users in the Database"}
+        return {"status": 404, "message": "There are no users in the Database"}
         # Close database connections
         my_cursor.close()
         db_connection.close()
@@ -68,7 +68,7 @@ def get_user(id):
     if len(user) == 0:
         # return if there its not users in DB
         return {
-            "status": 200,
+            "status": 404,
             "message": "There is no users with that id in the database",
         }
         # Close database connections
@@ -149,7 +149,7 @@ def create_topic():
     db_connection.close()
 
     # return new user with a HTTP status code of 201
-    return {"data": new_topic, "status": 201, "message": "Post successfully created"}
+    return {"data": new_topic, "status": 201, "message": "Topic successfully created"}
 
 
 # Topics route. method = GET, this route will return all the topics in existence
@@ -169,7 +169,7 @@ def get_topics():
     all_topics = my_cursor.fetchall()
 
     if len(all_topics) == 0:
-        return {"status": 200, "message": "There is no topics in the database"}
+        return {"status": 404, "message": "There is no topics in the database"}
         # Close database connections
         my_cursor.close()
         db_connection.close()
@@ -203,7 +203,7 @@ def get_topic(id):
         # return if there its not users in DB
         return {
             "response": "There is no topics with that id in the database",
-            "status": 200,
+            "status": 404,
         }
         # Close database connections
         my_cursor.close()
@@ -270,7 +270,7 @@ def get_posts():
     all_posts = my_cursor.fetchall()
 
     if len(all_posts) == 0:
-        return {"status": 200, "response": "There is no posts in the database"}
+        return {"status": 404, "response": "There is no posts in the database"}
     else:
         # Close database connections
         my_cursor.close()
@@ -300,7 +300,7 @@ def get_post(id):
     if len(post) == 0:
         # return if there its not users in DB
         return {
-            "status": 200,
+            "status": 404,
             "message": "There is no post with that id in the database",
         }
     else:
