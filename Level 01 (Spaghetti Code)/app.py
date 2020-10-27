@@ -4,8 +4,8 @@ import mysql.connector as mysql
 # Insert your respective database authentications same has in generate_db.py
 HOST = "localhost"
 DATABASE = "medium_clone"
-USER = "YOUR_USER"
-PASSWORD = "YOUR_PASSWORD"
+USER = "YOUR USERNAME"
+PASSWORD = "YOUR PASSWORD"
 
 
 app = Flask(__name__)
@@ -14,12 +14,12 @@ app = Flask(__name__)
 # Home route, this is the home root the default root your server respond
 @app.route("/")
 def hello_world():
-    routes = "get-users/id, create-user, create-topic, get-topics/id,create-post, get-posts/id"
+    routes = "users/id, user, topic, topics/id, post, posts/id"
     return f"Welcome to my first API! This are the routes that this api receives to {routes}"
 
 
 # Users route. method = GET, this route will return all the user in existence
-@app.route("/get-users", methods=["GET"])
+@app.route("/users", methods=["GET"])
 def get_users():
     # Connect to mysql Database
     db_connection = mysql.connect(
@@ -27,7 +27,7 @@ def get_users():
     )
 
     # Create 'Cursor' to execute queries to the database
-    my_cursor = db_connection.cursor()
+    my_cursor = db_connection.cursor(dictionary=True)
 
     # Execute query
     my_cursor.execute("SELECT * FROM users")
@@ -35,21 +35,21 @@ def get_users():
     all_users = my_cursor.fetchall()
 
     if len(all_users) == 0:
-        return {"response": "There is no users in the database"}
+        return {"status": 200, "message": "There are no users in the Database"}
+        # Close database connections
+        my_cursor.close()
+        db_connection.close()
     else:
-        # Commit the changes to the database
-        db_connection.commit()
-
         # Close database connections
         my_cursor.close()
         db_connection.close()
 
         # Return all the users
-        return {"response": "All register users", "users": all_users}
+        return {"status": 200, "data": all_users, "message": "successful"}
 
 
 # Users route. method = GET, this route will return ONLY the user with the matching ID
-@app.route("/get-users/<int:id>", methods=["GET"])
+@app.route("/users/<int:id>", methods=["GET"])
 def get_user(id):
     # Connect to mysql Database
     db_connection = mysql.connect(
@@ -63,25 +63,28 @@ def get_user(id):
     my_cursor.execute(f"SELECT * FROM users WHERE id='{id}'")
 
     # Store the results of the executed query
-    user = my_cursor.fetchall()
+    user = my_cursor.fetchone()
 
     if len(user) == 0:
         # return if there its not users in DB
-        return {"response": "There is no users with that id in the database"}
+        return {
+            "status": 200,
+            "message": "There is no users with that id in the database",
+        }
+        # Close database connections
+        my_cursor.close()
+        db_connection.close()
     else:
-        # Commit the changes to the database
-        db_connection.commit()
-
         # Close database connections
         my_cursor.close()
         db_connection.close()
 
         # Return all the users
-        return {"response": "The selected user", "user": user}
+        return {"status": 200, "response": "The selected user", "data": user}
 
 
 # User route. method = POST, this route manage the creation of new users
-@app.route("/create-user", methods=["POST"])
+@app.route("/users", methods=["POST"])
 def create_user():
     new_user = {
         "username": request.json["username"],
@@ -112,11 +115,11 @@ def create_user():
     db_connection.close()
 
     # return new user with a HTTP status code of 201
-    return new_user, 201
+    return {"message": "User successfully", "data": new_user, "status": 201}
 
 
 # Topics route. method = POST, this route manage the creation of new TOPIC
-@app.route("/create-topic", methods=["POST"])
+@app.route("/topic", methods=["POST"])
 def create_topic():
     new_topic = {
         "name": request.json["name"],
@@ -146,11 +149,11 @@ def create_topic():
     db_connection.close()
 
     # return new user with a HTTP status code of 201
-    return new_topic, 201
+    return {"data": new_topic, "status": 201, "message": "Post successfully created"}
 
 
 # Topics route. method = GET, this route will return all the topics in existence
-@app.route("/get-topics", methods=["GET"])
+@app.route("/topics", methods=["GET"])
 def get_topics():
     # Connect to mysql Database
     db_connection = mysql.connect(
@@ -166,21 +169,21 @@ def get_topics():
     all_topics = my_cursor.fetchall()
 
     if len(all_topics) == 0:
-        return {"response": "There is no topics in the database"}
+        return {"status": 200, "message": "There is no topics in the database"}
+        # Close database connections
+        my_cursor.close()
+        db_connection.close()
     else:
-        # Commit the changes to the database
-        db_connection.commit()
-
         # Close database connections
         my_cursor.close()
         db_connection.close()
 
         # Return all the topics
-        return {"response": "All register topics", "topics": all_topics}
+        return {"message": "All register topics", "data": all_topics, "status": 200}
 
 
 # Topics route. method = GET, this route will return ONLY the topic with the matching ID
-@app.route("/get-topics/<int:id>", methods=["GET"])
+@app.route("/topics/<int:id>", methods=["GET"])
 def get_topic(id):
     # Connect to mysql Database
     db_connection = mysql.connect(
@@ -194,25 +197,28 @@ def get_topic(id):
     my_cursor.execute(f"SELECT * FROM topics WHERE id='{id}'")
 
     # Store the results of the executed query
-    topic = my_cursor.fetchall()
+    topic = my_cursor.fetchone()
 
     if len(topic) == 0:
         # return if there its not users in DB
-        return {"response": "There is no topics with that id in the database"}
+        return {
+            "response": "There is no topics with that id in the database",
+            "status": 200,
+        }
+        # Close database connections
+        my_cursor.close()
+        db_connection.close()
     else:
-        # Commit the changes to the database
-        db_connection.commit()
-
         # Close database connections
         my_cursor.close()
         db_connection.close()
 
         # Return all the topics
-        return {"response": "The selected topic", "topic": topic}
+        return {"status": 200, "response": "The selected topic", "data": topic}
 
 
 # Post route. method = POST, this route manage the creation of new POST
-@app.route("/create-post", methods=["POST"])
+@app.route("/posts", methods=["POST"])
 def create_post():
     new_post = {
         "post_title": request.json["post_title"],
@@ -244,11 +250,11 @@ def create_post():
     db_connection.close()
 
     # return new post with a HTTP status code of 201
-    return new_post, 201
+    return {"data": new_post, "status": 201, "message": "Post successfully created"}
 
 
 # Post route. method = GET, this route will return all the posts in existence
-@app.route("/get-posts", methods=["GET"])
+@app.route("/posts", methods=["GET"])
 def get_posts():
     # Connect to mysql Database
     db_connection = mysql.connect(
@@ -264,21 +270,18 @@ def get_posts():
     all_posts = my_cursor.fetchall()
 
     if len(all_posts) == 0:
-        return {"response": "There is no posts in the database"}
+        return {"status": 200, "response": "There is no posts in the database"}
     else:
-        # Commit the changes to the database
-        db_connection.commit()
-
         # Close database connections
         my_cursor.close()
         db_connection.close()
 
         # Return all the posts
-        return {"response": "All register posts", "posts": all_posts}
+        return {"status": 200, "message": "All register posts", "data": all_posts}
 
 
 # Posts route. method = GET, this route will return ONLY the posts with the matching ID
-@app.route("/get-posts/<int:id>", methods=["GET"])
+@app.route("/posts/<int:id>", methods=["GET"])
 def get_post(id):
     # Connect to mysql Database
     db_connection = mysql.connect(
@@ -292,21 +295,21 @@ def get_post(id):
     my_cursor.execute(f"SELECT * FROM posts WHERE id='{id}'")
 
     # Store the results of the executed query
-    post = my_cursor.fetchall()
+    post = my_cursor.fetchone()
 
     if len(post) == 0:
         # return if there its not users in DB
-        return {"response": "There is no post with that id in the database"}
+        return {
+            "status": 200,
+            "message": "There is no post with that id in the database",
+        }
     else:
-        # Commit the changes to the database
-        db_connection.commit()
-
         # Close database connections
         my_cursor.close()
         db_connection.close()
 
         # Return all the posts
-        return {"response": "The selected post", "post": post}
+        return {"status": 200, "message": "The selected post", "data": post}
 
 
 if __name__ == "__main__":
