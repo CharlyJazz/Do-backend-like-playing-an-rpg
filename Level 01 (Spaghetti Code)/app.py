@@ -119,7 +119,7 @@ def create_user():
 
 
 # Topics route. method = POST, this route manage the creation of new TOPIC
-@app.route("/topic", methods=["POST"])
+@app.route("/topics", methods=["POST"])
 def create_topic():
     new_topic = {
         "name": request.json["name"],
