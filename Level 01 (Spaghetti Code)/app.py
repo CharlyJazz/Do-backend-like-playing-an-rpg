@@ -11,16 +11,16 @@ PASSWORD = "YOUR PASSWORD"
 app = Flask(__name__)
 
 
-# Home route, this is the home root the default root your server respond
 @app.route("/")
 def hello_world():
+    """Home route, this is the home root the default root your server respond"""
     routes = "users/id, users, topics, topics/id, posts, posts/id"
     return f"Welcome to my first API! These are the routes that this api responds to: {routes}"
 
 
-# Users route. method = GET, this route will return all the user in existence
 @app.route("/users", methods=["GET"])
 def get_users():
+    """Users route. method = GET, this route will return all the user in existence"""
     # Connect to mysql Database
     db_connection = mysql.connect(
         host=HOST, database=DATABASE, user=USER, password=PASSWORD
@@ -53,9 +53,12 @@ def get_users():
         return res
 
 
-# Users route. method = GET, this route will return ONLY the user with the matching ID
 @app.route("/users/<int:id>", methods=["GET"])
 def get_user(id):
+    """
+    Users route. method = GET, this route will return ONLY the user with the
+    matching ID
+    """
     # Connect to mysql Database
     db_connection = mysql.connect(
         host=HOST, database=DATABASE, user=USER, password=PASSWORD
@@ -90,9 +93,9 @@ def get_user(id):
         return res
 
 
-# User route. method = POST, this route manage the creation of new users
 @app.route("/users", methods=["POST"])
 def create_user():
+    """User route. method = POST, this route manage the creation of new users"""
     new_user = {
         "username": request.json["username"],
         "password": request.json["password"],
@@ -132,9 +135,9 @@ def create_user():
     return res, 201
 
 
-# Topics route. method = POST, this route manage the creation of new TOPIC
 @app.route("/topics", methods=["POST"])
 def create_topic():
+    """Topics route. method = POST, this route manage the creation of new TOPIC"""
     new_topic = {
         "name": request.json["name"],
         "description": request.json["description"],
@@ -172,9 +175,12 @@ def create_topic():
     return res, 201
 
 
-# Topics route. method = GET, this route will return all the topics in existence
 @app.route("/topics", methods=["GET"])
 def get_topics():
+    """
+    Topics route. method = GET, this route will return all the topics in
+    existence
+    """
     # Connect to mysql Database
     db_connection = mysql.connect(
         host=HOST, database=DATABASE, user=USER, password=PASSWORD
@@ -206,9 +212,12 @@ def get_topics():
         return res
 
 
-# Topics route. method = GET, this route will return ONLY the topic with the matching ID
 @app.route("/topics/<int:id>", methods=["GET"])
 def get_topic(id):
+    """
+    Topics route. method = GET, this route will return ONLY the topic with the
+    matching ID
+    """
     # Connect to mysql Database
     db_connection = mysql.connect(
         host=HOST, database=DATABASE, user=USER, password=PASSWORD
@@ -243,9 +252,9 @@ def get_topic(id):
         return res
 
 
-# Post route. method = POST, this route manage the creation of new POST
 @app.route("/posts", methods=["POST"])
 def create_post():
+    """Post route. method = POST, this route manage the creation of new POST"""
     new_post = {
         "post_title": request.json["post_title"],
         "post_image": request.json["post_image"],
@@ -286,10 +295,9 @@ def create_post():
     res = {"data": new_post, "status": 201, "message": "Post successfully created"}
     return res, 201
 
-
-# Post route. method = GET, this route will return all the posts in existence
 @app.route("/posts", methods=["GET"])
 def get_posts():
+   """Post route. method = GET, this route will return all the posts in existence"""
     # Connect to mysql Database
     db_connection = mysql.connect(
         host=HOST, database=DATABASE, user=USER, password=PASSWORD
@@ -321,9 +329,12 @@ def get_posts():
         return res
 
 
-# Posts route. method = GET, this route will return ONLY the posts with the matching ID
 @app.route("/posts/<int:id>", methods=["GET"])
 def get_post(id):
+   """
+   Posts route. method = GET, this route will return ONLY the posts with the
+   matching ID
+   """
     # Connect to mysql Database
     db_connection = mysql.connect(
         host=HOST, database=DATABASE, user=USER, password=PASSWORD
