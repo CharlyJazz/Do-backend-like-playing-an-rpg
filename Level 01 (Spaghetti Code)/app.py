@@ -1,7 +1,7 @@
 from flask import Flask, request
 import mysql.connector as mysql
 
-# Insert your respective database authentications same has in generate_db.py
+# Insert your respective database authentications, just as in generate_db.py
 HOST = "localhost"
 DATABASE = "medium_clone"
 USER = "YOUR USERNAME"
@@ -15,7 +15,7 @@ app = Flask(__name__)
 @app.route("/")
 def hello_world():
     routes = "users/id, users, topics, topics/id, posts, posts/id"
-    return f"Welcome to my first API! This are the routes that this api respond to {routes}"
+    return f"Welcome to my first API! These are the routes that this api responds to: {routes}"
 
 
 # Users route. method = GET, this route will return all the user in existence
