@@ -14,8 +14,8 @@ app = Flask(__name__)
 # Home route, this is the home root the default root your server respond
 @app.route("/")
 def hello_world():
-    routes = "users/id, user, topic, topics/id, post, posts/id"
-    return f"Welcome to my first API! This are the routes that this api receives to {routes}"
+    routes = "users/id, users, topics, topics/id, posts, posts/id"
+    return f"Welcome to my first API! This are the routes that this api respond to {routes}"
 
 
 # Users route. method = GET, this route will return all the user in existence
@@ -32,6 +32,7 @@ def get_users():
     # Execute query
     my_cursor.execute("SELECT * FROM users")
 
+    # Store all users retrieved
     all_users = my_cursor.fetchall()
 
     if len(all_users) == 0:
@@ -57,10 +58,12 @@ def get_user(id):
     )
 
     # Create 'Cursor' to execute queries to the database
-    my_cursor = db_connection.cursor()
+    my_cursor = db_connection.cursor(dictionary=True)
 
     # Execute query
-    my_cursor.execute(f"SELECT * FROM users WHERE id='{id}'")
+    query_user = "SELECT * FROM users WHERE id=%s"
+    user_id = (id,)
+    my_cursor.execute(query_user, params=user_id)
 
     # Store the results of the executed query
     user = my_cursor.fetchone()
@@ -100,12 +103,18 @@ def create_user():
     )
 
     # Create 'Cursor' to execute queries to the database
-    my_cursor = db_connection.cursor()
+    my_cursor = db_connection.cursor(dictionary=True)
 
     # Execute query
-    my_cursor.execute(
-        f"INSERT INTO users (create_at,username,password,email,first_name,last_name) VALUES (now(),'{new_user['username']}','{new_user['password']}','{new_user['email']}','{new_user['first_name']}','{new_user['last_name']}')"
+    query_create_user = "INSERT INTO users (create_at,username,password,email,first_name,last_name) VALUES (now(), %s, %s, %s, %s, %s)"
+    data = (
+        new_user["username"],
+        new_user["password"],
+        new_user["email"],
+        new_user["first_name"],
+        new_user["last_name"],
     )
+    my_cursor.execute(query_create_user, params=data)
 
     # Commit the changes to the database
     db_connection.commit()
@@ -134,12 +143,17 @@ def create_topic():
     )
 
     # Create 'Cursor' to execute queries to the database
-    my_cursor = db_connection.cursor()
+    my_cursor = db_connection.cursor(dictionary=True)
 
     # Execute query
-    my_cursor.execute(
-        f"INSERT INTO topics (create_at,name,description,topic_picture,slug) VALUES (now(),'{new_topic['name']}','{new_topic['description']}','{new_topic['topic_picture']}','{new_topic['slug']}')"
+    query_create_topic = "INSERT INTO topics (create_at,name,description,topic_picture,slug) VALUES (now(), %s, %s, %s, %s)"
+    data = (
+        new_topic["name"],
+        new_topic["description"],
+        new_topic["topic_picture"],
+        new_topic["slug"],
     )
+    my_cursor.execute(query_create_topic, params=data)
 
     # Commit the changes to the database
     db_connection.commit()
@@ -161,7 +175,7 @@ def get_topics():
     )
 
     # Create 'Cursor' to execute queries to the database
-    my_cursor = db_connection.cursor()
+    my_cursor = db_connection.cursor(dictionary=True)
 
     # Execute query
     my_cursor.execute("SELECT * FROM topics")
@@ -191,10 +205,12 @@ def get_topic(id):
     )
 
     # Create 'Cursor' to execute queries to the database
-    my_cursor = db_connection.cursor()
+    my_cursor = db_connection.cursor(dictionary=True)
 
     # Execute query
-    my_cursor.execute(f"SELECT * FROM topics WHERE id='{id}'")
+    query_topic = "SELECT * FROM topics WHERE id=%s"
+    topic_id = (id,)
+    my_cursor.execute(query_topic, params=topic_id)
 
     # Store the results of the executed query
     topic = my_cursor.fetchone()
@@ -235,12 +251,19 @@ def create_post():
     )
 
     # Create 'Cursor' to execute queries to the database
-    my_cursor = db_connection.cursor()
+    my_cursor = db_connection.cursor(dictionary=True)
 
     # Execute query
-    my_cursor.execute(
-        f"INSERT INTO posts (create_at,post_title,post_image,short_description,body,user_id,topic_id) VALUES (now(),'{new_post['post_title']}','{new_post['post_image']}','{new_post['short_description']}','{new_post['body']}','{new_post['user_id']}','{new_post['topic_id']}')"
+    query_create_post = "INSERT INTO posts (create_at,post_title,post_image,short_description,body,user_id,topic_id) VALUES (now(), %s, %s, %s, %s, %s, %s)"
+    data = (
+        new_post["post_title"],
+        new_post["post_image"],
+        new_post["short_description"],
+        new_post["body"],
+        new_post["user_id"],
+        new_post["topic_id"],
     )
+    my_cursor.execute(query_create_post, params=data)
 
     # Commit the changes to the database
     db_connection.commit()
@@ -262,7 +285,7 @@ def get_posts():
     )
 
     # Create 'Cursor' to execute queries to the database
-    my_cursor = db_connection.cursor()
+    my_cursor = db_connection.cursor(dictionary=True)
 
     # Execute query
     my_cursor.execute("SELECT * FROM posts")
@@ -289,10 +312,12 @@ def get_post(id):
     )
 
     # Create 'Cursor' to execute queries to the database
-    my_cursor = db_connection.cursor()
+    my_cursor = db_connection.cursor(dictionary=True)
 
     # Execute query
-    my_cursor.execute(f"SELECT * FROM posts WHERE id='{id}'")
+    query_post = "SELECT * FROM posts WHERE id=%s"
+    post_id = (id,)
+    my_cursor.execute(query_post, params=post_id)
 
     # Store the results of the executed query
     post = my_cursor.fetchone()
