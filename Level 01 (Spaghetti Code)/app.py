@@ -36,17 +36,21 @@ def get_users():
     all_users = my_cursor.fetchall()
 
     if len(all_users) == 0:
-        return {"status": 404, "message": "There are no users in the Database"}
         # Close database connections
         my_cursor.close()
         db_connection.close()
+
+        # Final API error response. 404 status code means that the server don't found the resource
+        res = {"status": 404, "message": "There are no users in the Database"}
+        return res, 404
     else:
         # Close database connections
         my_cursor.close()
         db_connection.close()
 
         # Return all the users
-        return {"status": 200, "data": all_users, "message": "successful"}
+        res = {"status": 200, "data": all_users, "message": "successful"}
+        return res
 
 
 # Users route. method = GET, this route will return ONLY the user with the matching ID
@@ -69,21 +73,21 @@ def get_user(id):
     user = my_cursor.fetchone()
 
     if len(user) == 0:
-        # return if there its not users in DB
-        return {
-            "status": 404,
-            "message": "There is no users with that id in the database",
-        }
         # Close database connections
         my_cursor.close()
         db_connection.close()
+
+        # Final API error response. 404 status code means that the server don't found the resource
+        res = {"status": 404, "message": "There is no users with that id in the database"}
+        return res, 404
     else:
         # Close database connections
         my_cursor.close()
         db_connection.close()
 
         # Return all the users
-        return {"status": 200, "response": "The selected user", "data": user}
+        res = {"status": 200, "response": "The selected user", "data": user}
+        return res
 
 
 # User route. method = POST, this route manage the creation of new users
@@ -124,7 +128,8 @@ def create_user():
     db_connection.close()
 
     # return new user with a HTTP status code of 201
-    return {"message": "User successfully", "data": new_user, "status": 201}
+    res = {"message": "User successfully", "data": new_user, "status": 201}
+    return res, 201
 
 
 # Topics route. method = POST, this route manage the creation of new TOPIC
@@ -163,7 +168,8 @@ def create_topic():
     db_connection.close()
 
     # return new user with a HTTP status code of 201
-    return {"data": new_topic, "status": 201, "message": "Topic successfully created"}
+    res = {"data": new_topic, "status": 201, "message": "Topic successfully created"}
+    return res, 201
 
 
 # Topics route. method = GET, this route will return all the topics in existence
@@ -183,17 +189,21 @@ def get_topics():
     all_topics = my_cursor.fetchall()
 
     if len(all_topics) == 0:
-        return {"status": 404, "message": "There is no topics in the database"}
         # Close database connections
         my_cursor.close()
         db_connection.close()
+
+        # Final API error response. 404 status code means that the server don't found the resource
+        res = {"status": 404, "message": "There is no topics in the database"}
+        return res, 404
     else:
         # Close database connections
         my_cursor.close()
         db_connection.close()
 
         # Return all the topics
-        return {"message": "All register topics", "data": all_topics, "status": 200}
+        res = {"message": "All register topics", "data": all_topics, "status": 200}
+        return res
 
 
 # Topics route. method = GET, this route will return ONLY the topic with the matching ID
@@ -216,21 +226,21 @@ def get_topic(id):
     topic = my_cursor.fetchone()
 
     if len(topic) == 0:
-        # return if there its not users in DB
-        return {
-            "response": "There is no topics with that id in the database",
-            "status": 404,
-        }
         # Close database connections
         my_cursor.close()
         db_connection.close()
+
+        # Final API error response. 404 status code means that the server don't found the resource
+        res = {"response": "There is no topics with that id in the database","status": 404}
+        return res, 404
     else:
         # Close database connections
         my_cursor.close()
         db_connection.close()
 
         # Return all the topics
-        return {"status": 200, "response": "The selected topic", "data": topic}
+        res = {"status": 200, "response": "The selected topic", "data": topic}
+        return res
 
 
 # Post route. method = POST, this route manage the creation of new POST
@@ -273,7 +283,8 @@ def create_post():
     db_connection.close()
 
     # return new post with a HTTP status code of 201
-    return {"data": new_post, "status": 201, "message": "Post successfully created"}
+    res = {"data": new_post, "status": 201, "message": "Post successfully created"}
+    return res, 201
 
 
 # Post route. method = GET, this route will return all the posts in existence
@@ -293,14 +304,21 @@ def get_posts():
     all_posts = my_cursor.fetchall()
 
     if len(all_posts) == 0:
-        return {"status": 404, "response": "There is no posts in the database"}
+        # Close database connections
+        my_cursor.close()
+        db_connection.close()
+
+        # Final API error response. 404 status code means that the server don't found the resource
+        res = {"status": 404, "response": "There is no posts in the database"}
+        return res, 404
     else:
         # Close database connections
         my_cursor.close()
         db_connection.close()
 
         # Return all the posts
-        return {"status": 200, "message": "All register posts", "data": all_posts}
+        res = {"status": 200, "message": "All register posts", "data": all_posts}
+        return res
 
 
 # Posts route. method = GET, this route will return ONLY the posts with the matching ID
@@ -323,11 +341,16 @@ def get_post(id):
     post = my_cursor.fetchone()
 
     if len(post) == 0:
-        # return if there its not users in DB
-        return {
+        # Close database connections
+        my_cursor.close()
+        db_connection.close()
+
+        # Final API error response. 404 status code means that the server don't found the resource
+        res = {
             "status": 404,
             "message": "There is no post with that id in the database",
         }
+        return res, 404
     else:
         # Close database connections
         my_cursor.close()
