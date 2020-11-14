@@ -27,19 +27,19 @@ data/
 De esta manera separaremos la manipulación de la base de datos creando clases de programacion orientada objeto siguiendo las restricciones necesarias para crear
 clases DAL, DTO y DAO, conceptos creados hace más de una década pero muy vigentes para crear software limpio.
 
-En la carpeta DAL guardaremos una clase para aislar nuestra RDBMS (MySQL) y allí guardar la apertura de una conexión y su cierre.
-Esta clase se usará en la carpeta DTA.
+En la carpeta `dal/` guardaremos una clase para aislar nuestra RDBMS (MySQL) y allí guardar la apertura de una conexión y su cierre.
+Esta clase se usará en la carpeta `dta/`.
 
-En la carpeta DTA guardaremos consultas a la base de dato que se usarán en los endpoints guardados en la carpeta `/api`, cada método de las clases DTA retornan una
+En la carpeta `dta/` guardaremos consultas a la base de datos que se usarán en los endpoints guardados en la carpeta `api/`, cada método de las clases DTA retornan una
 instancia de la clase DTO que viene siendo la serialización necesaria de los datos que la base de datos no da.
 
-En la carpeta DTO se guardan clases con métodos que mapean datos, quizás una clase DTO Users mapea un usuario y le crea un atributo full_name o edita la fecha en otor formato diferente
+En la carpeta `dto/` se guardán clases con métodos que mapean datos, quizás una clase DTO Users mapea un usuario y le crea un atributo full_name o edita la fecha en otor formato diferente
 que el que la base de dato nos ha dado.
 
 
 ## Descomponer `app.py`
 
-Para modularizar mas el proyecto haremos una carpeta `/api` en la cual agruparemos endpoints por dominio, para esto usaremos una caracteristica de Flask llamada
+Para modularizar mas el proyecto haremos una carpeta `api/` en la cual agruparemos endpoints por dominio, para esto usaremos una caracteristica de Flask llamada
 blueprint, que nos permite crear diferentes archivos con endpoints y evitar tenerlos todos en un solo archivo.
 
 ```
