@@ -10,19 +10,18 @@ separacion de competencias serian imposibles de agregar todas es un solo archivo
 Crearemos una carpeta para guardar las consultas a la base de datos
 
 ```
-/data
-    /dal
+data/
+    dal/
         mysql.py
-    /dto
-        /users.py
-        /articles.py
-        /....
-    /dta
-        /users.py
-        /articles.py
-        /....
-    /....
-    
+    dto/
+        users.py
+        articles.py
+        ....
+    dta/
+        users.py
+        articles.py
+        ...
+    ...
 ```
 
 De esta manera separaremos la manipulacion de la base de datos creando clases de programacion orientada objeto siguiendo las restricciones necesarias para crear 
@@ -44,10 +43,10 @@ Para modularizar mas el proyecto haremos una carpeta `/api` en la cual agruparem
 blueprint que nos permite crear diferentes archivos con endpoints y evitar tenerlos todos en un solo archivo.
 
 ```
-/api
-    /users.py
-    /articles.py
-    /....
+api/
+    users.py
+    articles.py
+    ...
 ```
 
 ## Aislar logica de creacion de la base datos
