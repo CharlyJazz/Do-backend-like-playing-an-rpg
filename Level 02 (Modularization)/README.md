@@ -15,7 +15,7 @@ data/
     dto/
         users.py
         articles.py
-        ....
+        ...
     dta/
         users.py
         articles.py
@@ -49,7 +49,7 @@ api/
 
 ## Aislar logica de creacion de la base datos
 
-Crearemos una carpeta `/schema` para guardar el archivo que crea la base de datos SQL.
+Crearemos una carpeta `schema/` para guardar el archivo que crea la base de datos SQL.
 
 ## Nuevos Endpoints por agregar:
 
