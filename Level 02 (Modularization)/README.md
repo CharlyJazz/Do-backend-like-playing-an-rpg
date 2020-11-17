@@ -4,7 +4,6 @@ En este nivel empezamos a modularizar el proyecto, porque sería inviable agrega
 sólo tenemos un archivo `app.py`. Caracteristicas como autenticación, validación de entradas, guardado de imágenes,
 separación de competencias serían imposibles de agregar todas en un solo archivo.
 
-
 ## Reducción de la cohesión entre endpoints y la base de datos
 
 Crearemos una carpeta para guardar las consultas a la base de datos
@@ -36,7 +35,6 @@ instancia de la clase DTO que viene siendo la serialización necesaria de los da
 En la carpeta `dto/` se guardán clases con métodos que mapean datos, quizás una clase DTO Users mapea un usuario y le crea un atributo full_name o edita la fecha en otor formato diferente
 que el que la base de dato nos ha dado.
 
-
 ## Descomponer `app.py`
 
 Para modularizar mas el proyecto haremos una carpeta `api/` en la cual agruparemos endpoints por dominio, para esto usaremos una caracteristica de Flask llamada
@@ -66,7 +64,6 @@ Creamos endpoints para los artículos e implementaremos un mecanismo para autent
 ## Seguridad: Proteger endpoints.
 
 Cada socilitud de creación, edición o de eliminar algo debe llevar en el Header un Bearer Token. De esta manera empezamos a implementar OAuth2 poco a poco.
-
 
 ## Enlaces Externos
 
