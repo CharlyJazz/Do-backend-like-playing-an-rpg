@@ -51,24 +51,37 @@ api/
 
 Crearemos una carpeta `schema/` para guardar el archivo que crea la base de datos SQL.
 
+Archivos de `schema/`:
+
+-   create_database.sql - Creara la base de dato
+-   create_topics.sql - Creata topics, son necesarios para crear articles
+-   create_users.sql - Creara dos usuarios necesario para testear los endpoints como claps, comments, etc.
+
 ## Nuevos Endpoints por agregar:
 
 Creamos endpoints para los artículos e implementaremos un mecanismo para autenticacion usando PASETO.
 
-- PUT /articles/:id
-- DELETE /articles/:id
-- GET /articles/:id
-- POST /auth/login
-- POST /auth/register
+-   PUT /users/:id
+-   GET /users/:id
+-   POST /auth/login
+-   POST /auth/register
+-   POST /articles
+-   PUT /articles/:id
+-   DELETE /articles/:id
+-   GET /articles/:id
+-   PUT /comments/:id
+-   DELETE /comments/:id
+-   GET /comments/:id
+-   POST /comments/
+-   POST /articles/:id/claps - Creation of claps for a article
 
-## Seguridad: Proteger endpoints.
+Notese que no vamos a implementar GET LIST de ni un CRUD Completo de usuarios. Solamente PUT y GET de Un usuario.
+Tampoco tendremos un CRUD de topics, solamente el GET LIST
 
-Cada socilitud de creación, edición o de eliminar algo debe llevar en el Header un Bearer Token. De esta manera empezamos a implementar OAuth2 poco a poco.
+El endpoint que era POST /users/ ahora sera /auth/register
 
 ## Enlaces Externos
 
 DAL, DTO Y DAO Clases: https://stackoverflow.com/questions/37644957/what-is-the-difference-between-dal-dto-and-dao-in-a-3-tier-architecture-style-i
 
 DTO y DAL: https://stackoverflow.com/questions/46091178/what-is-dto-equivalent-term-for-objects-returned-from-dal
-
-OAuth2: https://tools.ietf.org/html/rfc6749
