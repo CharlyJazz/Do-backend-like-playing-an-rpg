@@ -10,17 +10,20 @@ Crearemos una carpeta para guardar las consultas a la base de datos.
 
 ```
 data/
-    dal/
-        mysql.py
-    dto/
-        users.py
-        articles.py
-        ...
-    dao/
-        users.py
-        articles.py
-        ...
-    ...
+├── dal
+│   └── mysql.py
+├── dao
+│   ├── articles.py
+│   ├── auth.py
+│   ├── comments.py
+│   ├── topics.py
+│   └── users.py
+└── dto
+    ├── articles.py
+    ├── auth.py
+    ├── comments.py
+    ├── topics.py
+    └── users.py
 ```
 
 De esta manera separaremos la manipulación de la base de datos creando clases de programación orientada a objetos siguiendo las restricciones necesarias para crear
@@ -42,9 +45,12 @@ blueprint, que nos permite crear diferentes archivos con endpoints y evitar tene
 
 ```
 api/
-    users.py
-    articles.py
-    ...
+├── articles.py
+├── auth.py
+├── comments.py
+├── __init__.py
+├── topics.py
+└── users.py
 ```
 
 ## Aislar lógica de creación de la base de datos
