@@ -20,14 +20,14 @@ def hello_world():
 
 @app.route("/users", methods=["GET"])
 def get_users():
-    """Users route. method = GET, this route will return all the user in existence
-    Connect to mysql Database"""
+    """Users route. method = GET, this route will return all the user in existence"""
 
+    # Connect to mysql Database
     db_connection = mysql.connect(
         host=HOST, database=DATABASE, user=USER, password=PASSWORD
     )
 
-    # Create 'Cursor' to execute queries to the database
+    # Create 'Cursor' to execute queries in the database
     my_cursor = db_connection.cursor(dictionary=True)
 
     # Execute query
@@ -41,8 +41,11 @@ def get_users():
         my_cursor.close()
         db_connection.close()
 
-        # Final API error response. 404 status code means that the server don't found the resource
-        res = {"message": "There are no users in the Database", "data": []}
+        res = {
+            "status": 200,
+            "message": "There are no users in the Database",
+            "data": [],
+        }
         return res
     else:
         # Close database connections
@@ -83,7 +86,7 @@ def get_user(username):
         my_cursor.close()
         db_connection.close()
 
-        # Final API error response. 404 status code means that the server don't found the resource
+        # Final API response. 404 status code means that the server don't found the resource
         res = {
             "status": 404,
             "message": "There is no users with that id in the database",
@@ -158,17 +161,19 @@ def create_topic():
         host=HOST, database=DATABASE, user=USER, password=PASSWORD
     )
 
-    # Create 'Cursor' to execute queries to the database
+    # Create 'Cursor' to execute queries in the database
     my_cursor = db_connection.cursor(dictionary=True)
 
     # Execute query
     query_create_topic = "INSERT INTO topics (create_at,name,description,topic_picture,slug) VALUES (now(), %s, %s, %s, %s)"
+
     data = (
         new_topic["name"],
         new_topic["description"],
         new_topic["topic_picture"],
         new_topic["slug"],
     )
+
     my_cursor.execute(query_create_topic, params=data)
 
     # Commit the changes to the database
@@ -206,8 +211,11 @@ def get_topics():
         my_cursor.close()
         db_connection.close()
 
-        # Final API error response. 404 status code means that the server don't found the resource
-        res = {"message": "There is no topics in the database", "data": []}
+        res = {
+            "status": 200,
+            "message": "There is no topics in the database",
+            "data": [],
+        }
         return res
     else:
         # Close database connections
@@ -221,16 +229,14 @@ def get_topics():
 
 @app.route("/topics/<int:id>", methods=["GET"])
 def get_topic(id):
-    """Topics route. method = GET, this route will return ONLY the topic with the"""
-
-    # matching ID
+    """Topics route. method = GET, this route will return ONLY the topic with the matching ID"""
 
     # Connect to mysql Database
     db_connection = mysql.connect(
         host=HOST, database=DATABASE, user=USER, password=PASSWORD
     )
 
-    # Create 'Cursor' to execute queries to the database
+    # Create 'Cursor' to execute queries in the database
     my_cursor = db_connection.cursor(dictionary=True)
 
     # Execute query
@@ -246,7 +252,7 @@ def get_topic(id):
         my_cursor.close()
         db_connection.close()
 
-        # Final API error response. 404 status code means that the server don't found the resource
+        # Final API  response. 404 status code means that the server don't found the resource
         res = {
             "response": "There is no topics with that id in the database",
             "status": 404,
@@ -280,11 +286,12 @@ def create_post():
         host=HOST, database=DATABASE, user=USER, password=PASSWORD
     )
 
-    # Create 'Cursor' to execute queries to the database
+    # Create 'Cursor' to execute queries in the database
     my_cursor = db_connection.cursor(dictionary=True)
 
     # Execute query
     query_create_post = "INSERT INTO posts (create_at,post_title,post_image,short_description,body,user_id,topic_id) VALUES (now(), %s, %s, %s, %s, %s, %s)"
+
     data = (
         new_post["post_title"],
         new_post["post_image"],
@@ -293,6 +300,7 @@ def create_post():
         new_post["user_id"],
         new_post["topic_id"],
     )
+
     my_cursor.execute(query_create_post, params=data)
 
     # Commit the changes to the database
@@ -316,7 +324,7 @@ def get_posts():
         host=HOST, database=DATABASE, user=USER, password=PASSWORD
     )
 
-    # Create 'Cursor' to execute queries to the database
+    # Create 'Cursor' to execute queries in the database
     my_cursor = db_connection.cursor(dictionary=True)
 
     # Execute query
@@ -329,8 +337,11 @@ def get_posts():
         my_cursor.close()
         db_connection.close()
 
-        # Final API error response. 404 status code means that the server don't found the resource
-        res = {"response": "There is no posts in the database", "data": []}
+        res = {
+            "status": 200,
+            "response": "There is no posts in the database",
+            "data": [],
+        }
         return res
     else:
         # Close database connections
@@ -352,7 +363,7 @@ def get_post(id):
         host=HOST, database=DATABASE, user=USER, password=PASSWORD
     )
 
-    # Create 'Cursor' to execute queries to the database
+    # Create 'Cursor' to execute queries in the database
     my_cursor = db_connection.cursor(dictionary=True)
 
     # Execute query
@@ -368,7 +379,7 @@ def get_post(id):
         my_cursor.close()
         db_connection.close()
 
-        # Final API error response. 404 status code means that the server don't found the resource
+        # Final API  response. 404 status code means that the server don't found the resource
         res = {
             "status": 404,
             "message": "There is no post with that id in the database",
