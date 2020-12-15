@@ -1,5 +1,5 @@
 from flask import Flask, request
-import mysql.connector as mysql
+from mysql import connector as mysql
 
 # Insert your respective database authentications, just as in generate_db.py
 HOST = "localhost"

@@ -2,7 +2,7 @@
 # Just add your credentials for your installation of mysql and run it on the terminal.
 # On a side note, if you ever want to restart the data base from 0 just run it again.
 
-import mysql.connector as mysql
+from mysql import connector as mysql
 
 # insert your respective MYSQL data here
 HOST = "localhost"  # the host in which your database runs, shouldn't need to be changed
