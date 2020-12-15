@@ -36,25 +36,21 @@ def get_users():
     # Store all users retrieved
     all_users = my_cursor.fetchall()
 
-    if all_users is None or len(all_users) == 0:
-        # Close database connections
-        my_cursor.close()
-        db_connection.close()
+    # Close database connections
+    my_cursor.close()
+    db_connection.close()
 
+    if all_users is None or len(all_users) == 0:
         res = {
             "status": 200,
             "message": "There are no users in the Database",
             "data": [],
         }
-        return res
     else:
-        # Close database connections
-        my_cursor.close()
-        db_connection.close()
-
         # Return all the users
         res = {"status": 200, "data": all_users, "message": "successful"}
-        return res
+
+    return res
 
 
 @app.route("/users/<username>", methods=["GET"])
@@ -81,25 +77,21 @@ def get_user(username):
     # Store the results of the executed query
     user = my_cursor.fetchone()
 
-    if user is None or len(user) == 0:
-        # Close database connections
-        my_cursor.close()
-        db_connection.close()
+    # Close database connections
+    my_cursor.close()
+    db_connection.close()
 
+    if user is None or len(user) == 0:
         # Final API response. 404 status code means that the server don't found the resource
         res = {
             "status": 404,
             "message": "There is no users with that id in the database",
-        }
-        return res, 404
+        }, 404
     else:
-        # Close database connections
-        my_cursor.close()
-        db_connection.close()
-
         # Return all the users
         res = {"status": 200, "response": "The selected user", "data": user}
-        return res
+
+    return res
 
 
 @app.route("/users", methods=["POST"])
@@ -206,25 +198,21 @@ def get_topics():
 
     all_topics = my_cursor.fetchall()
 
-    if all_topics is None or len(all_topics) == 0:
-        # Close database connections
-        my_cursor.close()
-        db_connection.close()
+    # Close database connections
+    my_cursor.close()
+    db_connection.close()
 
+    if all_topics is None or len(all_topics) == 0:
         res = {
             "status": 200,
             "message": "There is no topics in the database",
             "data": [],
         }
-        return res
     else:
-        # Close database connections
-        my_cursor.close()
-        db_connection.close()
-
         # Return all the topics
         res = {"message": "All register topics", "data": all_topics, "status": 200}
-        return res
+
+    return res
 
 
 @app.route("/topics/<int:id>", methods=["GET"])
@@ -247,25 +235,21 @@ def get_topic(id):
     # Store the results of the executed query
     topic = my_cursor.fetchone()
 
-    if topic is None or len(topic) == 0:
-        # Close database connections
-        my_cursor.close()
-        db_connection.close()
+    # Close database connections
+    my_cursor.close()
+    db_connection.close()
 
+    if topic is None or len(topic) == 0:
         # Final API  response. 404 status code means that the server don't found the resource
         res = {
             "response": "There is no topics with that id in the database",
             "status": 404,
-        }
-        return res, 404
+        }, 404
     else:
-        # Close database connections
-        my_cursor.close()
-        db_connection.close()
-
         # Return all the topics
         res = {"status": 200, "response": "The selected topic", "data": topic}
-        return res
+
+    return res
 
 
 @app.route("/posts", methods=["POST"])
@@ -332,25 +316,21 @@ def get_posts():
 
     all_posts = my_cursor.fetchall()
 
-    if all_posts is None or len(all_posts) == 0:
-        # Close database connections
-        my_cursor.close()
-        db_connection.close()
+    # Close database connections
+    my_cursor.close()
+    db_connection.close()
 
+    if all_posts is None or len(all_posts) == 0:
         res = {
             "status": 200,
             "response": "There is no posts in the database",
             "data": [],
         }
-        return res
     else:
-        # Close database connections
-        my_cursor.close()
-        db_connection.close()
-
         # Return all the posts
         res = {"status": 200, "message": "All register posts", "data": all_posts}
-        return res
+
+    return res
 
 
 @app.route("/posts/<int:id>", methods=["GET"])
@@ -374,24 +354,21 @@ def get_post(id):
     # Store the results of the executed query
     post = my_cursor.fetchone()
 
-    if post is None or len(post) == 0:
-        # Close database connections
-        my_cursor.close()
-        db_connection.close()
+    # Close database connections
+    my_cursor.close()
+    db_connection.close()
 
+    if post is None or len(post) == 0:
         # Final API  response. 404 status code means that the server don't found the resource
         res = {
             "status": 404,
             "message": "There is no post with that id in the database",
-        }
-        return res, 404
+        }, 404
     else:
-        # Close database connections
-        my_cursor.close()
-        db_connection.close()
-
         # Return all the posts
-        return {"status": 200, "message": "The selected post", "data": post}
+        res = {"status": 200, "message": "The selected post", "data": post}
+
+    return res
 
 
 if __name__ == "__main__":
