@@ -220,7 +220,7 @@ def get_topic(id):
     db_connection.close()
 
     if topic is None or len(topic) == 0:
-        # Final API  response. 404 status code means that the server don't found the resource
+        # Final API response. 404 status code means that the server don't found the resource
         res = {
             "response": "There is no topics with that id in the database",
             "status": 404,
@@ -328,7 +328,7 @@ def get_post(id):
     db_connection.close()
 
     if post is None or len(post) == 0:
-        # Final API  response. 404 status code means that the server don't found the resource
+        # Final API response. 404 status code means that the server don't found the resource
         res = {
             "status": 404,
             "message": "There is no post with that id in the database",
