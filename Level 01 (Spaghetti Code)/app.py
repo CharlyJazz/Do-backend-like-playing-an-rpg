@@ -53,13 +53,10 @@ def get_users():
     return res
 
 
-@app.route("/users/<username>", methods=["GET"])
+@app.route("/users/@<username>", methods=["GET"])
 def get_user(username):
     """Users route. method = GET, this route will return ONLY the user with the
     matching ID"""
-
-    # Cleaning up the searched username
-    clean_username = username[1:]
 
     # Connect to mysql Database
     db_connection = mysql.connect(
@@ -70,7 +67,7 @@ def get_user(username):
     my_cursor = db_connection.cursor(dictionary=True, buffered=True)
 
     # Execute query
-    my_cursor.execute(f"SELECT * FROM users WHERE username=`{clean_username}`")
+    my_cursor.execute(f"SELECT * FROM users WHERE username=`{username}`")
 
     # Store the results of the executed query
     user = my_cursor.fetchone()
