@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, escape, request
 from mysql import connector as mysql
 
 # Insert your respective database authentications, just as in generate_db.py
@@ -14,8 +14,12 @@ app = Flask(__name__)
 @app.route("/")
 def hello_world():
     """Home route, this is the home root the default root your server respond"""
-    routes = "users/id, users, topics, topics/id, posts, posts/id"
-    return f"Welcome to my first API! These are the routes that this api responds to: {routes}"
+    routes = set(str(rule) for rule in app.url_map.iter_rules())
+    routes.discard("/")
+    routes.discard("/static/<path:filename>")
+    return escape(
+        f"Welcome to my first API! These are the routes that this api responds to: {', '.join(sorted(routes))}"
+    )
 
 
 @app.route("/users", methods=["GET"])
