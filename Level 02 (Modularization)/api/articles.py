@@ -1,4 +1,4 @@
-from flask import Blueprint
+from flask import Blueprint, request
 
 
 bp = Blueprint("articles", __name__, url_prefix="/articles")
